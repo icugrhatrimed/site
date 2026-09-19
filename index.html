@@ -130,17 +130,22 @@ a{text-decoration:none;color:inherit}
 }
 
 .care-item{
-  width:82px;
-  height:82px;
+  width:92px;
+  height:92px;
 
   justify-self:center;
 
-  border:0;
   border-radius:50%;
+  border:3px solid #FFFFFF;
 
-  background:#0757B5;
+  background:
+    linear-gradient(
+      145deg,
+      #032B5C,
+      #061B3A
+    );
 
-  color:#fff;
+  color:#FFFFFF;
 
   display:flex;
   flex-direction:column;
@@ -150,39 +155,44 @@ a{text-decoration:none;color:inherit}
   cursor:pointer;
 
   box-shadow:
-    0 8px 20px rgba(0,0,0,.22);
+    0 8px 25px rgba(0,0,0,.35);
 
   transition:
     transform .2s ease,
-    background .2s ease,
-    box-shadow .2s ease;
+    box-shadow .2s ease,
+    background .2s ease;
 }
 
 .care-item span{
-  font-size:32px;
+  font-size:34px;
   line-height:1;
 
   font-weight:900;
 
-  color:var(--yellow);
+  color:#FFC928;
 }
 
 .care-item small{
   margin-top:5px;
 
-  font-size:10px;
+  font-size:11px;
   font-weight:800;
 
-  color:#fff;
+  color:#FFFFFF;
 }
 
 .care-item:hover{
-  transform:translateY(-5px) scale(1.05);
-
-  background:#0B66C3;
+  transform:translateY(-6px) scale(1.06);
 
   box-shadow:
-    0 14px 28px rgba(0,0,0,.30);
+    0 14px 30px rgba(0,0,0,.40);
+
+  background:
+    linear-gradient(
+      145deg,
+      #06447F,
+      #032B5C
+    );
 }
 /* =================================
    MODAL NILAI UTAMA
@@ -438,7 +448,56 @@ section{padding:44px 0}
 .news-item h3{margin:0 0 4px;font-size:15px}.news-item p{margin:0;font-size:13px;color:var(--muted)}
 .badge{font-size:10px;font-weight:800;padding:6px 9px;border-radius:20px;background:#EAF3FB;color:var(--blue)}
 .links{margin-top:12px}.links a{display:flex;justify-content:space-between;padding:12px 14px;background:#F7FAFD;border:1px solid var(--line);border-radius:10px;margin-top:9px;color:var(--blue);font-weight:700}
+/* LINK TERKAIT */
 
+.related-links{
+  padding:22px;
+}
+
+.related-links h2{
+  margin:0 0 16px;
+  color:var(--navy);
+  font-size:22px;
+}
+
+.related-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  width:100%;
+  box-sizing:border-box;
+
+  padding:12px 16px;
+  margin-top:10px;
+
+  background:#F7FAFD;
+
+  border:1px solid var(--line);
+  border-radius:10px;
+
+  color:var(--blue);
+  text-decoration:none;
+
+  font-size:16px;
+  font-weight:700;
+
+  transition:.2s ease;
+}
+
+.related-link b{
+  font-size:25px;
+  line-height:1;
+  font-weight:400;
+  color:var(--blue);
+}
+
+.related-link:hover{
+  background:#EAF3FB;
+  border-color:var(--blue);
+  transform:translateX(3px);
+  box-shadow:0 4px 12px rgba(6,54,107,.10);
+}
 /* BOTTOM */
 .bottom-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:20px}
 .mini-values{display:grid;grid-template-columns:repeat(4,1fr);margin-top:20px}
@@ -555,16 +614,18 @@ section{padding:44px 0}
 }
  p{line-height:1.5;color:var(--muted)}
 .quote{
-  min-height:205px;
-  padding:28px;
+  min-height:280px;
+  height:100%;
 
-  border-radius:16px;
+  padding:38px 36px;
+
+  border-radius:20px;
 
   background:
     linear-gradient(
-      135deg,
-      #0A5C9B,
-      #06366B
+      145deg,
+      #0A5C9B 0%,
+      #06366B 100%
     );
 
   color:#fff;
@@ -575,33 +636,60 @@ section{padding:44px 0}
   display:flex;
   flex-direction:column;
   justify-content:center;
+
+  align-self:stretch;
+
+  box-shadow:
+    0 12px 30px rgba(6,54,107,.15);
 }
 .quote:after{
   display:none;
 }
 .quote .mark{
-  font-size:55px;
-  color:#FFFFFF;
-  line-height:.6;
-  margin-bottom:12px;
+  font-size:58px;
+  line-height:.5;
+
+  color:var(--yellow);
+
+  margin-bottom:22px;
+
+  font-weight:900;
+
+  opacity:.95;
 }
 .quote p{
-  font-size:21px;
-  line-height:1.5;
-
-  max-width:360px;
-
   margin:0;
 
-  color:#FFFFFF;
+  max-width:100%;
 
-  font-weight:700;
+  color:#fff;
+
+  font-size:19px;
+
+  line-height:1.65;
+
+  font-weight:600;
+
+  letter-spacing:.1px;
 
   position:relative;
+
   z-index:1;
 
   text-shadow:
-    0 2px 8px rgba(0,0,0,.25);
+    0 2px 8px rgba(0,0,0,.18);
+}
+ /* JUDUL QUOTE */
+.quote p strong{
+  display:block;
+
+  color:#FFFFFF;
+
+  font-size:23px;
+
+  font-weight:900;
+
+  margin-bottom:8px;
 }
 /* FOOTER */
 footer{background:var(--navy2);color:#fff;border-top:4px solid var(--yellow);padding:30px 0}
@@ -610,82 +698,588 @@ footer{background:var(--navy2);color:#fff;border-top:4px solid var(--yellow);pad
 footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:right}.footer-right b{color:var(--yellow)}
 .copyright{border-top:1px solid rgba(255,255,255,.15);margin-top:22px;padding-top:17px;font-size:12px;color:#BBD0E3}
 
-/* MOBILE */
-@media(max-width:900px){
- .header-main{flex-wrap:wrap;padding:10px 0}.logo-rs{width:235px}.logo-wecare{width:145px}.search{order:3;width:100%}
- .hero-grid{grid-template-columns:1fr;padding:40px 0}.quick-grid{grid-template-columns:repeat(2,1fr)}
- .two-col,.bottom-grid,.footer-grid{grid-template-columns:1fr}.footer-right{text-align:left}
+/* =========================================
+   RESPONSIVE TABLET & MOBILE
+========================================= */
+
+/* TABLET LANDSCAPE / TABLET PORTRAIT */
+@media(max-width:1024px){
+
+  .container{
+    width:92%;
+  }
+
+  /* HEADER */
+  .header-main{
+    min-height:76px;
+    gap:14px;
+  }
+
+  .logo-rs{
+    height:62px;
+    max-width:45%;
+  }
+
+  .logo-wecare{
+    height:58px;
+    max-width:25%;
+  }
+
+  .search{
+    width:210px;
+  }
+
+  .nav a{
+    padding:13px 12px;
+    font-size:13px;
+  }
+
+
+  /* HERO */
+  .hero-grid{
+    min-height:470px;
+    padding:45px 0;
+  }
+
+  .hero h1{
+    font-size:clamp(42px,6vw,62px);
+  }
+
+  .hero h2{
+    font-size:22px;
+  }
+
+  .hero p{
+    font-size:16px;
+    max-width:620px;
+  }
+
+
+  /* CARE */
+  .care-values{
+    max-width:680px;
+    gap:24px;
+    margin-top:28px;
+  }
+
+  .care-item{
+    width:88px;
+    height:88px;
+  }
+
+  .care-item span{
+    font-size:32px;
+  }
+
+  .care-item small{
+    font-size:10px;
+  }
+
+
+  /* AKSES CEPAT */
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+  }
+
+  .quick-card{
+    min-height:150px;
+  }
+
+
+  /* BAGIAN BAWAH */
+  .two-col{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .bottom-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .quote{
+    grid-column:1 / -1;
+    min-height:250px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-right{
+    text-align:right;
+  }
 }
+
+
+/* =========================================
+   TABLET PORTRAIT / HP BESAR
+========================================= */
+
+@media(max-width:768px){
+
+  .container{
+    width:94%;
+  }
+
+
+  /* HEADER */
+  .header-main{
+    flex-wrap:wrap;
+    padding:10px 0;
+  }
+
+  .logo-rs{
+    height:55px;
+    max-width:62%;
+  }
+
+  .logo-wecare{
+    height:48px;
+    max-width:30%;
+  }
+
+  .search{
+    order:3;
+    width:100%;
+  }
+
+
+  /* NAVIGASI */
+  .nav{
+    overflow-x:auto;
+  }
+
+  .nav a{
+    font-size:12px;
+    padding:12px 10px;
+  }
+
+
+  /* HERO */
+  .hero-grid{
+    min-height:auto;
+    padding:42px 0 35px;
+  }
+
+  .hero h1{
+    font-size:44px;
+    letter-spacing:-1.5px;
+  }
+
+  .hero h2{
+    font-size:21px;
+  }
+
+  .hero p{
+    font-size:15px;
+    line-height:1.6;
+  }
+
+
+  /* CARE */
+  .care-values{
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    width:100%;
+    max-width:100%;
+    padding:0;
+    margin-top:25px;
+  }
+
+  .care-item{
+    width:72px;
+    height:72px;
+    border-width:2px;
+  }
+
+  .care-item span{
+    font-size:27px;
+  }
+
+  .care-item small{
+    font-size:9px;
+  }
+
+
+  /* MODAL */
+  .value-modal{
+    width:90%;
+    min-height:auto;
+    padding:45px 28px 35px;
+  }
+
+  .value-modal-icon{
+    width:72px;
+    height:72px;
+    font-size:36px;
+  }
+
+  .value-modal h2{
+    font-size:34px;
+  }
+
+  .value-modal p{
+    font-size:17px;
+    line-height:1.6;
+  }
+
+
+  /* AKSES CEPAT */
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .quick-card{
+    padding:16px;
+    min-height:145px;
+  }
+
+  .quick-card .icon{
+    width:50px;
+    height:50px;
+  }
+
+  .quick-card .icon svg{
+    width:26px;
+    height:26px;
+  }
+
+  .quick-card h3{
+    font-size:15px;
+  }
+
+  .quick-card p{
+    font-size:12px;
+  }
+
+
+  /* PENGUMUMAN */
+  .two-col{
+    grid-template-columns:1fr;
+  }
+
+
+  /* LINK TERKAIT */
+  .related-link{
+    padding:11px 13px;
+    font-size:14px;
+  }
+
+
+  /* BAGIAN BAWAH */
+  .bottom-grid{
+    grid-template-columns:1fr;
+  }
+
+  .quote{
+    min-height:260px;
+  }
+
+
+  /* FOOTER */
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .footer-right{
+    text-align:left;
+  }
+
+  .footer-logo{
+    width:220px;
+  }
+}
+
+
+/* =========================================
+   ANDROID / HP
+========================================= */
+
 @media(max-width:560px){
- .value-modal{
-  width:90%;
-  min-height:auto;
-  padding:45px 25px 35px;
-}
 
-.value-modal-icon{
-  width:70px;
-  height:70px;
-  font-size:36px;
-}
+  .container{
+    width:94%;
+  }
 
-.value-modal h2{
-  font-size:34px;
-}
 
-.value-modal p{
-  font-size:17px;
-}
+  /* HEADER */
+  .header-main{
+    min-height:auto;
+    padding:8px 0;
+  }
 
-.value-modal-label{
-  font-size:10px;
-  letter-spacing:1.5px;
-}
- .hero{
-  background-position:center center;
-}
- .hero-grid{
-  min-height:445px;
-}
- .container{width:94%}
- .logo-rs{
-  height:52px;
-  width:auto;
-  max-width:65%;
-}
+  .logo-rs{
+    height:50px;
+    max-width:65%;
+  }
 
-.logo-wecare{
-  height:52px;
-  width:auto;
-  max-width:30%;
-}
- .nav a{font-size:12px;padding:12px 10px}.hero h1{font-size:40px}.hero h2{font-size:20px}
-.care-values{
-  grid-template-columns:repeat(4,1fr);
+  .logo-wecare{
+    height:42px;
+    max-width:30%;
+  }
 
-  gap:8px;
+  .search{
+    width:100%;
+    padding:9px 13px;
+  }
 
-  max-width:100%;
 
-  padding:0;
-}
+  /* NAVIGASI */
+  .nav a{
+    font-size:11px;
+    padding:11px 9px;
+  }
 
-.care-item{
-  width:62px;
-  height:62px;
-}
 
-.care-item span{
-  font-size:25px;
-}
+  /* HERO */
+  .hero{
+    background-position:center center;
+  }
 
-.care-item small{
-  font-size:8px;
+  .hero-grid{
+    padding:34px 0 30px;
+  }
+
+  .kicker{
+    font-size:16px;
+  }
+
+  .hero h1{
+    font-size:38px;
+    line-height:1;
+    letter-spacing:-1px;
+  }
+
+  .hero h2{
+    font-size:19px;
+    line-height:1.3;
+  }
+
+  .hero .line{
+    width:55px;
+    height:4px;
+    margin:15px 0;
+  }
+
+  .hero p{
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  .buttons{
+    margin-top:15px;
+  }
+
+  .btn{
+    padding:10px 14px;
+    font-size:13px;
+  }
+
+
+  /* =====================
+     CARE - MOBILE
+  ===================== */
+
+  .care-values{
+    grid-template-columns:repeat(4,1fr);
+
+    gap:6px;
+
+    width:100%;
+    max-width:100%;
+
+    margin-top:22px;
+  }
+
+  .care-item{
+    width:62px;
+    height:62px;
+
+    border-width:2px;
+
+    box-shadow:
+      0 6px 16px rgba(0,0,0,.35);
+  }
+
+  .care-item span{
+    font-size:24px;
+  }
+
+  .care-item small{
+    margin-top:3px;
+    font-size:8px;
+  }
+
+  .care-item:hover{
+    transform:translateY(-3px) scale(1.03);
+  }
+
+
+  /* =====================
+     MODAL CARE
+  ===================== */
+
+  .value-modal{
+    width:92%;
+    padding:40px 22px 30px;
+    border-radius:20px;
+  }
+
+  .value-close{
+    top:12px;
+    right:13px;
+    width:36px;
+    height:36px;
+    font-size:24px;
+  }
+
+  .value-modal-icon{
+    width:65px;
+    height:65px;
+    font-size:32px;
+    margin-bottom:15px;
+  }
+
+  .value-modal-label{
+    font-size:9px;
+    letter-spacing:1.2px;
+  }
+
+  .value-modal h2{
+    font-size:30px;
+  }
+
+  .modal-line{
+    width:55px;
+    height:4px;
+    margin:14px auto 16px;
+  }
+
+  .value-modal p{
+    font-size:16px;
+    line-height:1.6;
+  }
+
+
+  /* =====================
+     AKSES CEPAT
+  ===================== */
+
+  .quick-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .quick-card{
+    min-height:auto;
+    padding:16px;
+  }
+
+  .quick-card .icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+  }
+
+  .quick-card .icon svg{
+    width:25px;
+    height:25px;
+  }
+
+  .quick-card h3{
+    font-size:15px;
+  }
+
+  .quick-card p{
+    font-size:12px;
+  }
+
+
+  /* =====================
+     LINK TERKAIT
+  ===================== */
+
+  .related-links{
+    padding:17px;
+  }
+
+  .related-links h2{
+    font-size:20px;
+  }
+
+  .related-link{
+    padding:11px 12px;
+    font-size:14px;
+  }
+
+  .related-link b{
+    font-size:22px;
+  }
+
+
+  /* =====================
+     WAKTU & KALENDER
+  ===================== */
+
+  .clock-display{
+    font-size:32px;
+  }
+
+  .date-display{
+    font-size:13px;
+  }
+
+  .calendar-date{
+    font-size:10px;
+    padding:5px 1px;
+  }
+
+
+  /* =====================
+     QUOTE
+  ===================== */
+
+  .quote{
+    min-height:240px;
+    padding:30px 25px;
+    border-radius:18px;
+  }
+
+  .quote .mark{
+    font-size:48px;
+    margin-bottom:17px;
+  }
+
+  .quote p{
+    font-size:16px;
+    line-height:1.6;
+  }
+
+  .quote p strong{
+    font-size:20px;
+    margin-bottom:7px;
+  }
+
+
+  /* =====================
+     FOOTER
+  ===================== */
+
+  .footer-logo{
+    width:190px;
+  }
+
+  footer{
+    padding:25px 0;
+  }
+
+  .copyright{
+    font-size:11px;
+  }
+
 }
- .quick-grid{grid-template-columns:1fr}
- .news-item{grid-template-columns:55px 1fr}.badge{display:none}.panel{padding:17px}
-}
-</style>
 </head>
 
 <body>
@@ -977,7 +1571,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
   <h2>🔗 Link Terkait</h2>
 
-  <a href="https://https://sim.rumahsakit.unair.ac.id/login"
+  <a href="https://sim.rumahsakit.unair.ac.id/login"
      target="_blank"
      rel="noopener noreferrer"
      class="related-link">
@@ -993,11 +1587,11 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
     <b>›</b>
   </a>
 
-  <a href="URL_AIRA_SCHEDULER"
+  <a href="https://drive.google.com/drive/folders/1p9n3PdJQXw9ZstqzB4di2JtFtvUSa5TN"
      target="_blank"
      rel="noopener noreferrer"
      class="related-link">
-    <span>AIRA ICU Scheduler</span>
+    <span>Jadwal KSM</span>
     <b>›</b>
   </a>
 
@@ -1051,8 +1645,16 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 </div>
   <div class="card panel" id="kontak"><h2>☎ Kontak Unit</h2><div class="contact"><p>📍 ICU Grha Trimed<br>RS Universitas Airlangga<br>Jl. Mulyorejo, Surabaya</p><p>☎ (031) 5916290</p><p>✉ sekretariat@rsua.unair.ac.id</p></div></div>
-  <div class="quote"><div class="mark">“</div><p>Your Safety is Our Priority, keselamatan pasien merupakan prioritas utama dalam setiap pelayanan yang diberikan oleh Rumah Sakit Universitas Airlangga..</p>
- </div>
+<div class="quote">
+  <div class="mark">“</div>
+
+  <p>
+    <strong>Your Safety is Our Priority</strong><br>
+    Keselamatan pasien merupakan prioritas utama
+    dalam setiap pelayanan yang diberikan oleh
+    Rumah Sakit Universitas Airlangga.
+  </p>
+</div>
 </section>
 </main>
 
