@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portal Digital ICU Grha Trimed RS Universitas Airlangga">
+<title>ICU Grha Trimed | RS Universitas Airlangga</title>
+<style>
+:root{
+ --navy:#06366B;--navy2:#052B55;--blue:#0B5B9E;
+ --yellow:#FFC928;--orange:#F39A16;--bg:#F3F7FB;
+ --text:#12385F;--muted:#657B92;--white:#fff;
+ --line:#DCE7F1;--shadow:0 10px 28px rgba(6,54,107,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,92%);margin:auto}
+
+/* HEADER */
+.site-header{background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.header-main{min-height:84px;display:flex;align-items:center;gap:20px;justify-content:space-between}
+.logo-rs{
+  height:72px;
+  width:auto;
+  max-width:48%;
+  object-fit:contain;
+}
+
+.logo-wecare{
+  height:72px;
+  width:auto;
+  max-width:30%;
+  object-fit:contain;
+}
+.search{width:245px;background:#F2F6FA;border:1px solid var(--line);border-radius:28px;padding:11px 15px;display:flex;gap:8px}
+.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text)}
+.navbar{background:var(--navy);color:#fff}
+.nav{display:flex;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:14px 15px;font-size:14px;font-weight:700;white-space:nowrap}
+.nav a:hover,.nav a.active{background:var(--yellow);color:#173B63}
+
+/* HERO */
+.hero{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4,43,85,.78) 0%,
+      rgba(5,70,120,.70) 50%,
+      rgba(7,91,145,.62) 100%
+    ),
+    url('img_website.png') center center / cover no-repeat;
+
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  min-height:445px;
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:center;
+  padding:55px 0;
+  position:relative;
+  z-index:1;
+}
+.kicker{
+  color:var(--yellow);
+  font-weight:800;
+  font-size:19px;
+  letter-spacing:.5px;
+  margin-bottom:8px;
+}
+
+.hero h1{
+  font-size:clamp(46px,6vw,72px);
+  line-height:.95;
+  font-weight:900;
+  letter-spacing:-2px;
+  margin:8px 0 12px;
+  text-shadow:0 3px 15px rgba(0,0,0,.20);
+}
+
+.hero h2{
+  font-size:25px;
+  font-weight:700;
+  margin:0 0 16px;
+}
+
+.hero .line{
+  width:80px;
+  height:6px;
+  background:var(--yellow);
+  border-radius:10px;
+  margin:20px 0;
+}
+
+.hero p{
+  font-size:17px;
+  line-height:1.7;
+  color:#F1F7FC;
+  max-width:720px;
+  text-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+.hero .line{width:62px;height:5px;background:var(--yellow);border-radius:4px;margin:18px 0}
+.hero p{font-size:17px;line-height:1.65;color:#E7F2FC;max-width:650px}
+.buttons{margin-top:20px}
+.btn{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:800;margin:4px 7px 4px 0}
+.btn-primary{background:var(--yellow);color:#173B63}
+.btn-outline{border:1px solid rgba(255,255,255,.65);color:#fff}
+.hero-values{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:28px;
+  max-width:850px;
+}
+
+.hero-value{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:58px;
+  text-align:center;
+
+  background:linear-gradient(
+    135deg,
+    rgba(255,201,40,.96),
+    rgba(243,154,22,.92)
+  );
+
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:12px;
+
+  padding:12px 10px;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.35);
+
+  transition:.2s ease;
+}
+
+.hero-value:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 12px 25px rgba(0,0,0,.25);
+}
+
+.hero-value b{
+  display:block;
+  color:#173B63;
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+.hero-value .symbol{font-size:25px;color:var(--yellow)}
+.hero-value b{display:block}.hero-value span{font-size:11px;color:#D7E9F8}
+/* =================================
+   MODAL NILAI UTAMA
+================================= */
+
+.value-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#0757B5;
+  color:var(--yellow);
+  font-size:20px;
+  font-weight:900;
+  flex-shrink:0;
+}
+
+.value-overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(2,20,40,.78);
+
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+
+  z-index:9999;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+}
+
+.value-overlay.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.value-modal{
+  position:relative;
+
+  width:min(760px,88%);
+  min-height:360px;
+
+  background:linear-gradient(
+    145deg,
+    #ffffff 0%,
+    #F4F8FC 100%
+  );
+
+  border-radius:24px;
+  padding:55px 65px;
+
+  text-align:center;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+
+  transform:translateY(25px) scale(.96);
+
+  transition:transform .3s ease;
+}
+
+.value-overlay.show .value-modal{
+  transform:translateY(0) scale(1);
+}
+
+.value-modal-icon{
+  width:90px;
+  height:90px;
+
+  margin:0 auto 20px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  background:#0757B5;
+  color:var(--yellow);
+
+  font-size:48px;
+  font-weight:900;
+
+  box-shadow:
+    0 10px 25px rgba(7,87,181,.25);
+}
+
+.value-modal-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+
+.value-modal h2{
+  margin:0;
+  color:var(--navy);
+  font-size:42px;
+  font-weight:900;
+}
+
+.modal-line{
+  width:70px;
+  height:5px;
+
+  background:linear-gradient(
+    90deg,
+    var(--yellow),
+    var(--orange)
+  );
+
+  border-radius:10px;
+  margin:18px auto 20px;
+}
+
+.value-modal p{
+  max-width:600px;
+  margin:0 auto;
+
+  color:#40566D;
+
+  font-size:20px;
+  line-height:1.7;
+}
+
+.value-close{
+  position:absolute;
+
+  top:18px;
+  right:20px;
+
+  width:42px;
+  height:42px;
+
+  border:0;
+  border-radius:50%;
+
+  background:#EDF3F8;
+  color:var(--navy);
+
+  font-size:28px;
+  cursor:pointer;
+
+  display:grid;
+  place-items:center;
+
+  transition:.2s ease;
+}
+
+.value-close:hover{
+  background:var(--yellow);
+  transform:rotate(90deg);
+}
+/* SECTIONS */
+section{padding:44px 0}
+.section-head{margin-bottom:20px}
+.section-head h2{margin:0;color:var(--navy);font-size:28px}
+.section-head p{margin:6px 0;color:var(--muted)}
+.quick{background:#EDF5FB}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.quick-card{padding:19px;min-height:145px;transition:.2s}
+.quick-card:hover{transform:translateY(-4px)}
+.quick-card .icon{width:48px;height:48px;border-radius:14px;background:var(--blue);display:grid;place-items:center;color:#fff;font-size:23px;margin-bottom:13px}
+.quick-card:nth-child(2) .icon{background:#0B9BA8}
+.quick-card:nth-child(3) .icon{background:#D77717}
+.quick-card:nth-child(4) .icon{background:#7958A9}
+.quick-card:nth-child(5) .icon{background:#23915F}
+.quick-card:nth-child(6) .icon{background:#E0A500}
+.quick-card:nth-child(7) .icon{background:#E87522}
+.quick-card:nth-child(8) .icon{background:#236BC0}
+.quick-card h3{font-size:16px;margin:0 0 6px}.quick-card p{font-size:13px;line-height:1.5;color:var(--muted);margin:0}.arrow{float:right;color:var(--blue);font-size:22px;font-weight:bold}
+
+/* NEWS */
+.two-col{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
+.panel{padding:22px}.panel h2{margin:0;color:var(--navy);font-size:22px}
+.news{margin-top:13px}.news-item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.news-item:last-child{border-bottom:0}
+.date{background:#FFF1BF;color:#715200;border-radius:9px;padding:7px;text-align:center;font-weight:800}.date strong{display:block;font-size:19px}
+.news-item h3{margin:0 0 4px;font-size:15px}.news-item p{margin:0;font-size:13px;color:var(--muted)}
+.badge{font-size:10px;font-weight:800;padding:6px 9px;border-radius:20px;background:#EAF3FB;color:var(--blue)}
+.links{margin-top:12px}.links a{display:flex;justify-content:space-between;padding:12px 14px;background:#F7FAFD;border:1px solid var(--line);border-radius:10px;margin-top:9px;color:var(--blue);font-weight:700}
+
+/* BOTTOM */
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:20px}
+.mini-values{display:grid;grid-template-columns:repeat(4,1fr);margin-top:20px}
+.mini{text-align:center;font-size:11px;font-weight:700}.round{width:44px;height:44px;border-radius:50%;background:var(--blue);display:grid;place-items:center;color:#fff;margin:0 auto 7px}
+.mini:nth-child(2) .round{background:#249462}.mini:nth-child(3) .round{background:#E58C17}.mini:nth-child(4) .round{background:#D1A300}
+.contact
+ /* TIME & CALENDAR */
+
+.time-calendar{
+  min-height:300px;
+}
+
+.time-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:5px;
+}
+
+.time-header h2{
+  margin:0;
+  color:var(--navy);
+  font-size:22px;
+}
+
+.time-header span{
+  background:var(--yellow);
+  color:#173B63;
+  font-size:11px;
+  font-weight:900;
+  padding:5px 9px;
+  border-radius:20px;
+}
+
+.clock-display{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:var(--navy);
+  margin-top:10px;
+}
+
+.date-display{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+/* Kalender */
+
+.calendar{
+  border-top:1px solid var(--line);
+  padding-top:12px;
+}
+
+.calendar-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.calendar-month{
+  font-size:14px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.calendar-nav{
+  display:flex;
+  gap:5px;
+}
+
+.calendar-nav button{
+  width:25px;
+  height:25px;
+  border:0;
+  border-radius:6px;
+  background:#EDF5FB;
+  color:var(--navy);
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  text-align:center;
+}
+
+.calendar-day-name{
+  font-size:10px;
+  font-weight:800;
+  color:var(--muted);
+  padding:3px 0;
+}
+
+.calendar-date{
+  font-size:11px;
+  padding:5px 2px;
+  border-radius:7px;
+  color:var(--text);
+}
+
+.calendar-date.today{
+  background:var(--yellow);
+  color:#173B63;
+  font-weight:900;
+}
+
+.calendar-date.empty{
+  visibility:hidden;
+}
+ p{line-height:1.5;color:var(--muted)}
+.quote{min-height:205px;padding:25px;border-radius:16px;background:linear-gradient(135deg,#0A5C9B,#06366B);color:#fff;position:relative;overflow:hidden}
+.quote:after{content:"";position:absolute;right:-70px;bottom:-120px;width:260px;height:260px;border:22px solid var(--yellow);border-radius:50%}
+.quote .mark{font-size:55px;color:var(--yellow);line-height:.6}.quote p{font-size:21px;line-height:1.45;max-width:360px;position:relative;z-index:1}
+
+/* FOOTER */
+footer{background:var(--navy2);color:#fff;border-top:4px solid var(--yellow);padding:30px 0}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:25px;align-items:center}
+.footer-logo{width:260px;max-width:100%;filter:none;
+footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:right}.footer-right b{color:var(--yellow)}
+.copyright{border-top:1px solid rgba(255,255,255,.15);margin-top:22px;padding-top:17px;font-size:12px;color:#BBD0E3}
+
+/* MOBILE */
+@media(max-width:900px){
+ .header-main{flex-wrap:wrap;padding:10px 0}.logo-rs{width:235px}.logo-wecare{width:145px}.search{order:3;width:100%}
+ .hero-grid{grid-template-columns:1fr;padding:40px 0}.quick-grid{grid-template-columns:repeat(2,1fr)}
+ .two-col,.bottom-grid,.footer-grid{grid-template-columns:1fr}.footer-right{text-align:left}
+}
+@media(max-width:560px){
+ .value-modal{
+  width:90%;
+  min-height:auto;
+  padding:45px 25px 35px;
+}
+
+.value-modal-icon{
+  width:70px;
+  height:70px;
+  font-size:36px;
+}
+
+.value-modal h2{
+  font-size:34px;
+}
+
+.value-modal p{
+  font-size:17px;
+}
+
+.value-modal-label{
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+ .hero{
+  background-position:center center;
+}
+ .hero-grid{
+  min-height:445px;
+}
+ .container{width:94%}
+ .logo-rs{
+  height:52px;
+  width:auto;
+  max-width:65%;
+}
+
+.logo-wecare{
+  height:52px;
+  width:auto;
+  max-width:30%;
+}
+ .nav a{font-size:12px;padding:12px 10px}.hero h1{font-size:40px}.hero h2{font-size:20px}
+.hero-values{
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  max-width:100%;
+}
+
+.hero-value{
+  min-height:52px;
+}
+
+.hero-value b{
+  font-size:15px;
+}.quick-grid{grid-template-columns:1fr}
+ .news-item{grid-template-columns:55px 1fr}.badge{display:none}.panel{padding:17px}
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+ <div class="container header-main">
+  <img class="logo-rs" src="logo-rs-unair.png" alt="RS Universitas Airlangga">
+  <img class="logo-wecare" src="logo-wecare.png" alt="WE CARE">
+  <label class="search">🔎 <input type="search" placeholder="Cari informasi..." aria-label="Cari informasi"></label>
+ </div>
+ <div class="navbar">
+  <div class="container nav">
+   <a class="active" href="#beranda">⌂ Beranda</a>
+   <a href="#profil">👤 Profil</a>
+   <a href="#pelayanan">♥ Pelayanan</a>
+   <a href="#clinical">▣ Clinical Tools</a>
+   <a href="#mutu">✓ Mutu & Keselamatan</a>
+   <a href="#sdm">♟ SDM</a>
+   <a href="#dokumen">▤ SOP & Dokumen</a>
+   <a href="#galeri">▧ Galeri</a>
+   <a href="#kontak">☎ Kontak</a>
+  </div>
+ </div>
+</header>
+
+<main id="beranda">
+<section class="hero">
+ <div class="container hero-grid">
+  <div>
+   <div class="kicker">Selamat Datang di</div>
+   <h1>ICU Grha Trimed</h1>
+   <h2>RS Universitas Airlangga</h2>
+   <div class="line"></div>
+   <h2 style="color:var(--yellow)">Integrated Care for a Safer Tomorrow</h2>
+   <p>Portal informasi dan sumber daya digital untuk mendukung pelayanan intensif yang aman, berkualitas, dan berpusat pada pasien.</p>
+   <div class="buttons"><a class="btn btn-primary" href="#akses">Akses Cepat</a><a class="btn btn-outline" href="#pengumuman">Pengumuman</a></div>
+<div class="hero-values">
+
+  <button class="hero-value" onclick="showValue('cepat')">
+    <span class="value-icon">C</span>
+    <b>Cepat</b>
+  </button>
+
+  <button class="hero-value" onclick="showValue('aman')">
+    <span class="value-icon">A</span>
+    <b>Aman</b>
+  </button>
+
+  <button class="hero-value" onclick="showValue('ramah')">
+    <span class="value-icon">R</span>
+    <b>Ramah</b>
+  </button>
+
+  <button class="hero-value" onclick="showValue('empati')">
+    <span class="value-icon">E</span>
+    <b>Empati</b>
+  </button>
+
+</div>
+  </div>
+ </div>
+</section>
+<!-- MODAL NILAI UTAMA -->
+
+<div class="value-overlay" id="valueOverlay">
+
+  <div class="value-modal">
+
+    <button class="value-close" onclick="closeValue()">
+      ×
+    </button>
+
+    <div class="value-modal-icon" id="modalIcon">
+      C
+    </div>
+
+    <div class="value-modal-label">
+      NILAI UTAMA ICU GRHA TRIMED
+    </div>
+
+    <h2 id="modalTitle">Cepat</h2>
+
+    <div class="modal-line"></div>
+
+    <p id="modalText">
+      Pelayanan yang responsif, sigap, dan tepat waktu bagi setiap pasien.
+    </p>
+
+  </div>
+
+</div>
+<section class="quick" id="akses">
+ <div class="container">
+  <div class="section-head"><h2>▦ Akses Cepat</h2><p>Pilih menu berikut untuk menuju informasi yang Anda butuhkan.</p></div>
+  <div class="quick-grid">
+   <a class="card quick-card" href="#pelayanan"><span class="arrow">›</span><div class="icon">♡</div><h3>Pelayanan ICU</h3><p>Informasi layanan, alur, dan fasilitas.</p></a>
+   <a class="card quick-card" href="#clinical"><span class="arrow">›</span><div class="icon">▣</div><h3>Clinical Decision Support</h3><p>Kalkulator klinis, score, dan panduan.</p></a>
+   <a class="card quick-card" href="#mutu"><span class="arrow">›</span><div class="icon">✓</div><h3>Mutu & Keselamatan Pasien</h3><p>Program, laporan, dan budaya keselamatan.</p></a>
+   <a class="card quick-card" href="#sdm"><span class="arrow">›</span><div class="icon">♟</div><h3>SDM & Jadwal</h3><p>Informasi tim, jadwal jaga, dan pengembangan SDM.</p></a>
+   <a class="card quick-card" href="#dokumen"><span class="arrow">›</span><div class="icon">▤</div><h3>SOP & Pedoman</h3><p>SOP, panduan klinis, dan alur kerja.</p></a>
+   <a class="card quick-card" href="#dokumen"><span class="arrow">›</span><div class="icon">□</div><h3>Dokumen ICU</h3><p>Formulir, template, dan arsip.</p></a>
+   <a class="card quick-card" href="#mutu"><span class="arrow">›</span><div class="icon">💊</div><h3>Medication Safety</h3><p>High-alert, panduan dosis, dan label obat.</p></a>
+   <a class="card quick-card" href="#mutu"><span class="arrow">›</span><div class="icon">▮▮▮</div><h3>Dashboard Mutu</h3><p>Indikator, laporan, dan capaian.</p></a>
+  </div>
+ </div>
+</section>
+
+<section id="pengumuman">
+ <div class="container two-col">
+  <div class="card panel">
+   <h2>📣 Pengumuman Terbaru</h2>
+   <div class="news">
+    <div class="news-item"><div class="date"><strong>--</strong>---</div><div><h3>Rapat Bulanan ICU Grha Trimed</h3><p>Agenda dan informasi pelaksanaan rapat.</p></div><span class="badge">RAPAT</span></div>
+    <div class="news-item"><div class="date"><strong>--</strong>---</div><div><h3>Pelatihan SP2KP dan RCA pada PMKP</h3><p>Jadwal dan materi pelatihan.</p></div><span class="badge">PELATIHAN</span></div>
+    <div class="news-item"><div class="date"><strong>--</strong>---</div><div><h3>Survey Budaya Keselamatan Pasien</h3><p>Informasi kegiatan dan hasil survey.</p></div><span class="badge">KEGIATAN</span></div>
+    <div class="news-item"><div class="date"><strong>--</strong>---</div><div><h3>Update Dokumen dan Formulir ICU</h3><p>Template terbaru tersedia di menu Dokumen.</p></div><span class="badge">INFO</span></div>
+   </div>
+  </div>
+  <div class="card panel">
+   <h2>🔗 Link Terkait</h2>
+   <div class="links">
+    <a href="#" target="_blank" rel="noopener">SIRS RS UNAIR <span>›</span></a>
+    <a href="#" target="_blank" rel="noopener">SIPRABU / Privileging <span>›</span></a>
+    <a href="#" target="_blank" rel="noopener">AIRA ICU Scheduler <span>›</span></a>
+    <a href="#" target="_blank" rel="noopener">AIRA Smart CDSS <span>›</span></a>
+    <a href="#" target="_blank" rel="noopener">E-Learning & Pelatihan <span>›</span></a>
+    <a href="#" target="_blank" rel="noopener">Google Drive ICU <span>›</span></a>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="profil">
+ <div class="container bottom-grid">
+<div class="card panel time-calendar">
+
+  <div class="time-header">
+    <h2>🕐 Waktu & Kalender</h2>
+    <span>WIB</span>
+  </div>
+
+  <div class="clock-display" id="liveClock">
+    00:00:00
+  </div>
+
+  <div class="date-display" id="todayDate">
+    Memuat tanggal...
+  </div>
+
+  <div class="calendar" id="calendar"></div>
+
+</div>
+  <div class="card panel" id="kontak"><h2>☎ Kontak Unit</h2><div class="contact"><p>📍 ICU Grha Trimed<br>RS Universitas Airlangga<br>Jl. Mulyorejo, Surabaya</p><p>☎ (031) 5916290</p><p>✉ sekretariat@rsua.unair.ac.id</p></div></div>
+  <div class="quote"><div class="mark">“</div><p>Keselamatan pasien adalah tanggung jawab kita bersama.</p><div style="width:55px;height:4px;background:var(--yellow)"></div></div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer-grid">
+  <div><img class="footer-logo" src="logo-rs-unair.png" alt="RS Universitas Airlangga"></div>
+  <div><p><b style="color:#fff">ICU Grha Trimed</b></p><p>RS Universitas Airlangga</p><p>Cepat • Aman • Ramah • Empati</p></div>
+  <div class="footer-right"><p><b>Stronger Teams</b></p><p>Safer Patients</p><p>Brighter Tomorrow</p></div>
+ </div>
+ <div class="container copyright">© 2026 RS Universitas Airlangga — ICU Grha Trimed</div>
+</footer>
+
+<script>
+document.querySelector('.search input').addEventListener('input',function(){
+ const q=this.value.toLowerCase().trim();
+ document.querySelectorAll('.quick-card,.news-item,.links a').forEach(el=>{
+   el.style.display=(!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
+ });
+});
+ /* =========================
+   JAM DIGITAL & KALENDER
+========================= */
+
+const clockElement = document.getElementById("liveClock");
+const dateElement = document.getElementById("todayDate");
+const calendarElement = document.getElementById("calendar");
+
+const monthNames = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember"
+];
+
+const dayNames = [
+  "Min",
+  "Sen",
+  "Sel",
+  "Rab",
+  "Kam",
+  "Jum",
+  "Sab"
+];
+
+let calendarDate = new Date();
+
+
+function updateClock(){
+
+  const now = new Date();
+
+  const hours = String(now.getHours()).padStart(2,"0");
+  const minutes = String(now.getMinutes()).padStart(2,"0");
+  const seconds = String(now.getSeconds()).padStart(2,"0");
+
+  clockElement.textContent =
+    `${hours}:${minutes}:${seconds}`;
+
+  const day = dayNames[now.getDay()];
+  const date = now.getDate();
+  const month = monthNames[now.getMonth()];
+  const year = now.getFullYear();
+
+  dateElement.textContent =
+    `${day}, ${date} ${month} ${year}`;
+}
+
+
+function renderCalendar(){
+
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth =
+    new Date(year, month + 1, 0).getDate();
+
+  const today = new Date();
+
+  let html = `
+    <div class="calendar-header">
+
+      <div class="calendar-month">
+        ${monthNames[month]} ${year}
+      </div>
+
+      <div class="calendar-nav">
+        <button onclick="changeMonth(-1)">‹</button>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
+
+    </div>
+
+    <div class="calendar-grid">
+  `;
+
+  dayNames.forEach(day => {
+
+    html += `
+      <div class="calendar-day-name">
+        ${day}
+      </div>
+    `;
+
+  });
+
+  // Kotak kosong sebelum tanggal 1
+  for(let i = 0; i < firstDay; i++){
+
+    html += `
+      <div class="calendar-date empty">0</div>
+    `;
+
+  }
+
+  // Tanggal
+  for(let date = 1; date <= daysInMonth; date++){
+
+    const isToday =
+      date === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear();
+
+    html += `
+      <div class="calendar-date ${isToday ? "today" : ""}">
+        ${date}
+      </div>
+    `;
+
+  }
+
+  html += `
+    </div>
+  `;
+
+  calendarElement.innerHTML = html;
+}
+
+
+function changeMonth(direction){
+
+  calendarDate.setMonth(
+    calendarDate.getMonth() + direction
+  );
+
+  renderCalendar();
+}
+
+
+updateClock();
+renderCalendar();
+
+setInterval(updateClock,1000);
+/* =================================
+   MODAL NILAI UTAMA
+================================= */
+
+const valueData = {
+
+  cepat:{
+    title:"Cepat",
+    icon:"C",
+    text:"Pelayanan yang responsif, sigap, dan tepat waktu bagi setiap pasien."
+  },
+
+  aman:{
+    title:"Aman",
+    icon:"A",
+    text:"Menjamin keselamatan pasien melalui standar mutu dan prosedur pelayanan."
+  },
+
+  ramah:{
+    title:"Ramah",
+    icon:"R",
+    text:"Memberikan pelayanan dengan sikap sopan, santun, dan komunikasi yang baik."
+  },
+
+  empati:{
+    title:"Empati",
+    icon:"E",
+    text:"Melayani dengan kepedulian dan memahami kondisi pasien secara menyeluruh."
+  }
+
+};
+
+
+function showValue(type){
+
+  const data = valueData[type];
+
+  if(!data) return;
+
+  document.getElementById("modalIcon").textContent =
+    data.icon;
+
+  document.getElementById("modalTitle").textContent =
+    data.title;
+
+  document.getElementById("modalText").textContent =
+    data.text;
+
+  document
+    .getElementById("valueOverlay")
+    .classList.add("show");
+}
+
+
+function closeValue(){
+
+  document
+    .getElementById("valueOverlay")
+    .classList.remove("show");
+
+}
+
+
+/* Klik area gelap */
+
+document
+  .getElementById("valueOverlay")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+      closeValue();
+    }
+
+  });
+
+
+/* Tombol ESC */
+
+document.addEventListener("keydown",function(e){
+
+  if(e.key === "Escape"){
+    closeValue();
+  }
+
+}); 
+</script>
+</body>
+</html>
