@@ -1651,14 +1651,14 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 
 <!-- 4. SDM & Jadwal -->
-   <a class="card quick-card"
+<a class="card quick-card"
    href="#"
    data-protected="true"
    data-access-name="SDM & Jadwal"
    data-access-icon="♟"
    data-access-code="Pegawai_2026"
    data-access-url="https://docs.google.com/spreadsheets/d/13owMXnb5Y2CE1tKPKOHfD9XH2EJY8PQQBE1UhbdGV_M/edit?gid=793080063#gid=793080063"
-   onclick="openProtectedAccess(event, this)">
+   onclick="openProtectedAccess(event, this)"
    target="_blank"
    rel="noopener noreferrer">
 
@@ -1680,14 +1680,14 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 
 <!-- 5. SOP & Pedoman -->
-   <a class="card quick-card"
+<a class="card quick-card"
    href="#"
    data-protected="true"
    data-access-name="SOP & Pedoman"
    data-access-icon="▤"
    data-access-code="Pegawai_2026"
    data-access-url="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
-   onclick="openProtectedAccess(event, this)">
+   onclick="openProtectedAccess(event, this)"
    target="_blank"
    rel="noopener noreferrer">
 
@@ -1898,10 +1898,79 @@ document.querySelector('.search input').addEventListener('input',function(){
    el.style.display=(!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
  });
 });
-document.querySelector('.search input').addEventListener(...);
+
+/* =================================
+   PASSWORD / PROTECTED ACCESS
+================================= */
+
+let protectedTarget = null;
+
+function openProtectedAccess(event, element){
+    event.preventDefault();
+    event.stopPropagation();
+
+    protectedTarget = element;
+
+    const modal = document.getElementById("accessModal");
+    const title = document.getElementById("accessModalTitle");
+    const text = document.getElementById("accessModalText");
+    const input = document.getElementById("accessCode");
+    const error = document.getElementById("accessError");
+
+    title.textContent = element.dataset.accessName || "Akses Terbatas";
+    text.textContent = "Masukkan kode akses untuk membuka menu ini.";
+
+    input.value = "";
+    error.style.display = "none";
+
+    modal.style.display = "flex";
+
+    setTimeout(() => {
+        input.focus();
+    }, 100);
+}
+
+function closeProtectedAccess(){
+    const modal = document.getElementById("accessModal");
+
+    modal.style.display = "none";
+    protectedTarget = null;
+}
+
+function verifyProtectedAccess(event){
+    event.preventDefault();
+
+    if(!protectedTarget) return;
+
+    const input = document.getElementById("accessCode");
+    const error = document.getElementById("accessError");
+
+    const enteredCode = input.value.trim();
+    const correctCode = protectedTarget.dataset.accessCode;
+    const targetUrl = protectedTarget.dataset.accessUrl;
+
+    if(enteredCode === correctCode){
+
+        error.style.display = "none";
+
+        window.open(
+            targetUrl,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+        closeProtectedAccess();
+
+    }else{
+
+        error.style.display = "block";
+        input.value = "";
+        input.focus();
+
+    }
+}
 
 
-/* TAMBAHKAN JAVASCRIPT PASSWORD DI SINI */
 /* =================================
    PELAYANAN ICU - EXPAND / COLLAPSE
 ================================= */
