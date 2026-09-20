@@ -683,6 +683,344 @@ a{text-decoration:none;color:inherit}
   }
 }
 
+
+/* =================================
+   DASHBOARD MUTU
+================================= */
+
+.mutu-overlay{
+  position:fixed;
+  inset:0;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(2,20,40,.80);
+
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+
+  z-index:99998;
+}
+
+.mutu-overlay.show{
+  display:flex;
+}
+
+.mutu-modal{
+  position:relative;
+
+  width:min(650px,92%);
+
+  padding:40px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #F4F8FC 100%
+    );
+
+  border-radius:24px;
+
+  text-align:center;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+
+  animation:mutuModalIn .3s ease;
+}
+
+@keyframes mutuModalIn{
+
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(.95);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+.mutu-icon{
+  width:78px;
+  height:78px;
+
+  margin:0 auto 16px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  background:#236BC0;
+
+  color:#FFC928;
+
+  font-size:36px;
+
+  box-shadow:
+    0 10px 25px rgba(35,107,192,.25);
+}
+
+.mutu-label{
+  color:var(--muted);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  margin-bottom:7px;
+}
+
+.mutu-modal h2{
+  margin:0;
+
+  color:var(--navy);
+
+  font-size:30px;
+
+  font-weight:900;
+}
+
+.mutu-selection{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:14px;
+
+  margin-top:25px;
+}
+
+.mutu-option{
+  min-height:95px;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  background:#fff;
+
+  color:var(--navy);
+
+  cursor:pointer;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:7px;
+
+  transition:.2s ease;
+
+  box-shadow:
+    0 5px 15px rgba(6,54,107,.07);
+}
+
+.mutu-option span{
+  font-size:24px;
+}
+
+.mutu-option b{
+  font-size:16px;
+}
+
+.mutu-option:hover{
+  transform:translateY(-4px);
+
+  border-color:#4A9FE8;
+
+  background:#F1F8FE;
+
+  box-shadow:
+    0 10px 22px rgba(6,54,107,.12);
+}
+
+@media(max-width:560px){
+
+  .mutu-modal{
+    width:92%;
+    padding:32px 20px;
+    border-radius:20px;
+  }
+
+  .mutu-selection{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .mutu-option{
+    min-height:85px;
+  }
+
+}
+/* =================================
+   VIEWER LAPORAN MUTU
+================================= */
+
+.mutu-viewer{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(2,20,40,.90);
+  backdrop-filter:blur(8px);
+  z-index:100000;
+}
+
+.mutu-viewer.show{
+  display:flex;
+}
+
+.mutu-viewer-box{
+  position:relative;
+  width:min(1100px,94%);
+  height:min(90vh,760px);
+  background:#fff;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
+  display:flex;
+  flex-direction:column;
+}
+
+.mutu-viewer-close{
+  position:absolute;
+  right:18px;
+  top:15px;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:#EDF3F8;
+  color:var(--navy);
+  font-size:26px;
+  cursor:pointer;
+  z-index:5;
+}
+
+.mutu-viewer-header{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.mutu-viewer-label{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:var(--muted);
+}
+
+.mutu-viewer-header h2{
+  margin:4px 0;
+  color:var(--navy);
+  font-size:24px;
+}
+
+.mutu-slide{
+  flex:1;
+  min-height:0;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#F3F7FB;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.mutu-slide img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.slide-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:45px;
+  height:45px;
+  border:0;
+  border-radius:50%;
+  background:rgba(6,54,107,.85);
+  color:#fff;
+  font-size:32px;
+  cursor:pointer;
+  z-index:3;
+}
+
+.slide-prev{
+  left:15px;
+}
+
+.slide-next{
+  right:15px;
+}
+
+.mutu-slide-caption{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+  padding:12px 0 6px;
+}
+
+.mutu-slide-dots{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+}
+
+.mutu-slide-dots span{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#C8D5E2;
+}
+
+.mutu-slide-dots span.active{
+  background:#0757B5;
+  transform:scale(1.25);
+}
+
+/* RESPONSIVE HP */
+
+@media(max-width:560px){
+
+  .mutu-viewer-box{
+    width:96%;
+    height:88vh;
+    padding:15px;
+    border-radius:16px;
+  }
+
+  .mutu-viewer-header h2{
+    font-size:19px;
+  }
+
+  .slide-nav{
+    width:38px;
+    height:38px;
+    font-size:27px;
+  }
+
+}
+
 /* SECTIONS */
 section{padding:44px 0}
 /* SECTIONS */
@@ -1865,6 +2203,184 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
     </div>
 
 </div>
+
+
+<!-- MODAL DASHBOARD MUTU -->
+<div id="mutuModal" class="mutu-overlay">
+
+    <div class="mutu-modal">
+
+        <button
+            class="value-close"
+            onclick="closeMutuModal()"
+            aria-label="Tutup">
+            ×
+        </button>
+
+        <div class="mutu-icon">
+            📊
+        </div>
+
+        <div class="mutu-label">
+            DASHBOARD MUTU ICU GRHA TRIMED
+        </div>
+
+        <h2 id="mutuModalTitle">
+            Pilih Tahun
+        </h2>
+
+        <div class="modal-line"></div>
+
+
+        <!-- PILIH TAHUN -->
+
+        <div id="tahunMutu" class="mutu-selection">
+
+            <button
+                class="mutu-option"
+                onclick="selectMutuYear(2026)">
+                <span>📅</span>
+                <b>2026</b>
+            </button>
+
+            <button
+                class="mutu-option"
+                onclick="selectMutuYear(2025)">
+                <span>📅</span>
+                <b>2025</b>
+            </button>
+
+            <button
+                class="mutu-option"
+                onclick="selectMutuYear(2024)">
+                <span>📅</span>
+                <b>2024</b>
+            </button>
+
+        </div>
+
+
+        <!-- PILIH TRIWULAN -->
+
+        <div
+            id="triwulanMutu"
+            class="mutu-selection"
+            style="display:none;">
+
+            <button
+                class="mutu-option"
+                onclick="openMutuSlideshow(1)">
+                <span>1</span>
+                <b>Triwulan I</b>
+            </button>
+
+            <button
+                class="mutu-option"
+                onclick="openMutuSlideshow(2)">
+                <span>2</span>
+                <b>Triwulan II</b>
+            </button>
+
+            <button
+                class="mutu-option"
+                onclick="openMutuSlideshow(3)">
+                <span>3</span>
+                <b>Triwulan III</b>
+            </button>
+
+            <button
+                class="mutu-option"
+                onclick="openMutuSlideshow(4)">
+                <span>4</span>
+                <b>Triwulan IV</b>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =================================
+     VIEWER LAPORAN MUTU
+================================= -->
+
+<div id="mutuViewer" class="mutu-viewer">
+
+    <div class="mutu-viewer-box">
+
+        <button
+            class="mutu-viewer-close"
+            onclick="closeMutuViewer()"
+            aria-label="Tutup">
+            ×
+        </button>
+
+
+        <!-- HEADER -->
+
+        <div class="mutu-viewer-header">
+
+            <div class="mutu-viewer-label">
+                DASHBOARD MUTU
+            </div>
+
+            <h2 id="viewerTitle">
+                Laporan Mutu
+            </h2>
+
+        </div>
+
+
+        <!-- AREA SLIDE -->
+
+        <div class="mutu-slide">
+
+            <button
+                class="slide-nav slide-prev"
+                onclick="changeMutuSlide(-1)"
+                aria-label="Sebelumnya">
+                ‹
+            </button>
+
+
+            <img
+                id="mutuSlideImage"
+                src=""
+                alt="Laporan Mutu">
+
+
+            <button
+                class="slide-nav slide-next"
+                onclick="changeMutuSlide(1)"
+                aria-label="Berikutnya">
+                ›
+            </button>
+
+        </div>
+
+
+        <!-- KETERANGAN SLIDE -->
+
+        <div
+            id="mutuSlideCaption"
+            class="mutu-slide-caption">
+        </div>
+
+
+        <!-- TITIK INDIKATOR -->
+
+        <div
+            id="mutuSlideDots"
+            class="mutu-slide-dots">
+        </div>
+
+    </div>
+
+</div>
+
+
 <section class="quick" id="akses">
  <div class="container">
   <div class="section-head"><h2>▦ Akses Cepat</h2><p>Pilih menu berikut untuk menuju informasi yang Anda butuhkan.</p></div>
@@ -2098,9 +2614,13 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 <!-- 8. Dashboard Mutu -->
 <a class="card quick-card"
-   href="URL_DRIVE_DASHBOARD"
-   target="_blank"
-   rel="noopener noreferrer">
+   href="#"
+   data-protected="true"
+   data-access-name="Dashboard Mutu"
+   data-access-icon="📊"
+   data-access-code="Pegawai_2026"
+   data-access-type="dashboard-mutu"
+   onclick="openProtectedAccess(event, this)">
 
   <span class="arrow">›</span>
 
@@ -2291,28 +2811,213 @@ function verifyProtectedAccess(event){
     const correctCode = protectedTarget.dataset.accessCode;
     const targetUrl = protectedTarget.dataset.accessUrl;
 
-    if(enteredCode === correctCode){
+if(enteredCode === correctCode){
 
-        error.style.display = "none";
+    error.style.display = "none";
 
-        window.open(
-            targetUrl,
-            "_blank",
-            "noopener,noreferrer"
-        );
+    const accessType =
+        protectedTarget.dataset.accessType;
+
+    if(accessType === "dashboard-mutu"){
 
         closeProtectedAccess();
 
-    }else{
+        openMutuDashboard();
 
-        error.style.display = "block";
-        input.value = "";
-        input.focus();
-
+        return;
     }
+
+    const targetUrl =
+        protectedTarget.dataset.accessUrl;
+
+    window.open(
+        targetUrl,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    closeProtectedAccess();
+
+}else{
+
+    error.style.display = "block";
+
+    input.value = "";
+
+    input.focus();
+
+}
+}
+/* =================================
+   DASHBOARD MUTU
+================================= */
+
+let selectedMutuYear = null;
+
+
+/* BUKA DASHBOARD MUTU */
+
+function openMutuDashboard(){
+
+    const modal =
+        document.getElementById("mutuModal");
+
+    document.getElementById("mutuModalTitle")
+        .textContent = "Pilih Tahun";
+
+    document.getElementById("tahunMutu")
+        .style.display = "grid";
+
+    document.getElementById("triwulanMutu")
+        .style.display = "none";
+
+    modal.classList.add("show");
 }
 
 
+/* PILIH TAHUN */
+
+function selectMutuYear(year){
+
+    selectedMutuYear = year;
+
+    document.getElementById("mutuModalTitle")
+        .textContent =
+        "Triwulan " + year;
+
+    document.getElementById("tahunMutu")
+        .style.display = "none";
+
+    document.getElementById("triwulanMutu")
+        .style.display = "grid";
+}
+
+
+/* TUTUP DASHBOARD MUTU */
+
+function closeMutuModal(){
+
+    document.getElementById("mutuModal")
+        .classList.remove("show");
+
+}
+
+
+/* PILIH TRIWULAN */
+
+function openMutuSlideshow(triwulan){
+
+    const year = selectedMutuYear;
+
+    closeMutuModal();
+
+    openMutuViewer(year, triwulan);
+
+}
+/* =================================
+   SLIDESHOW LAPORAN MUTU
+================================= */
+
+let mutuSlides = [];
+let currentMutuSlide = 0;
+
+function getMutuSlides(year, triwulan){
+
+    return [
+        {
+            image: `mutu/${year}/tw${triwulan}/01.jpg`,
+            title: `Laporan Mutu ${year} - Triwulan ${triwulan}`
+        },
+        {
+            image: `mutu/${year}/tw${triwulan}/02.jpg`,
+            title: `Indikator Mutu`
+        },
+        {
+            image: `mutu/${year}/tw${triwulan}/03.jpg`,
+            title: `Capaian Mutu`
+        },
+        {
+            image: `mutu/${year}/tw${triwulan}/04.jpg`,
+            title: `Evaluasi dan Tindak Lanjut`
+        }
+    ];
+
+}
+
+function openMutuViewer(year, triwulan){
+
+    mutuSlides = getMutuSlides(year, triwulan);
+
+    currentMutuSlide = 0;
+
+    document.getElementById("viewerTitle").textContent =
+        `Laporan Mutu ${year} — Triwulan ${triwulan}`;
+
+    document.getElementById("mutuViewer")
+        .classList.add("show");
+
+    renderMutuSlide();
+
+}
+
+function renderMutuSlide(){
+
+    if(!mutuSlides.length) return;
+
+    const slide = mutuSlides[currentMutuSlide];
+
+    document.getElementById("mutuSlideImage").src =
+        slide.image;
+
+    document.getElementById("mutuSlideImage").alt =
+        slide.title;
+
+    document.getElementById("mutuSlideCaption").textContent =
+        `${slide.title} — ${currentMutuSlide + 1} / ${mutuSlides.length}`;
+
+    const dots =
+        document.getElementById("mutuSlideDots");
+
+    dots.innerHTML = "";
+
+    mutuSlides.forEach((item,index)=>{
+
+        const dot =
+            document.createElement("span");
+
+        if(index === currentMutuSlide){
+            dot.classList.add("active");
+        }
+
+        dots.appendChild(dot);
+
+    });
+
+}
+
+function changeMutuSlide(direction){
+
+    currentMutuSlide += direction;
+
+    if(currentMutuSlide < 0){
+        currentMutuSlide =
+            mutuSlides.length - 1;
+    }
+
+    if(currentMutuSlide >= mutuSlides.length){
+        currentMutuSlide = 0;
+    }
+
+    renderMutuSlide();
+
+}
+
+function closeMutuViewer(){
+
+    document.getElementById("mutuViewer")
+        .classList.remove("show");
+
+}
 /* =================================
    PELAYANAN ICU - EXPAND / COLLAPSE
 ================================= */
