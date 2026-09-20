@@ -355,7 +355,333 @@ a{text-decoration:none;color:inherit}
   background:var(--yellow);
   transform:rotate(90deg);
 }
-/* TAMBAHKAN CSS MODAL AKSES DI SINI */
+/* =================================
+   MODAL AKSES TERLINDUNGI
+================================= */
+
+.access-overlay{
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(2,20,40,.78);
+
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+
+  z-index:99999;
+
+  animation:accessFade .25s ease;
+}
+
+@keyframes accessFade{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+
+
+/* KOTAK MODAL */
+
+.access-modal{
+  position:relative;
+
+  width:min(500px,90%);
+
+  padding:42px 42px 38px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #F4F8FC 100%
+    );
+
+  border-radius:24px;
+
+  text-align:center;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+
+  border:1px solid rgba(255,255,255,.8);
+
+  animation:accessModalIn .3s ease;
+}
+
+@keyframes accessModalIn{
+  from{
+    transform:translateY(25px) scale(.94);
+    opacity:0;
+  }
+
+  to{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+}
+
+
+/* ICON */
+
+.access-icon{
+  width:82px;
+  height:82px;
+
+  margin:0 auto 18px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  background:#0757B5;
+
+  color:#FFC928;
+
+  font-size:38px;
+
+  box-shadow:
+    0 10px 25px rgba(7,87,181,.25);
+}
+
+
+/* LABEL */
+
+.access-modal::before{
+  content:"AKSES TERLINDUNGI";
+
+  display:block;
+
+  color:#657B92;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  margin-bottom:7px;
+}
+
+
+/* JUDUL */
+
+.access-modal h3{
+  margin:0;
+
+  color:#06366B;
+
+  font-size:30px;
+
+  font-weight:900;
+}
+
+
+/* GARIS */
+
+.access-modal h3::after{
+  content:"";
+
+  display:block;
+
+  width:60px;
+
+  height:4px;
+
+  margin:14px auto 18px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #FFC928,
+      #F39A16
+    );
+}
+
+
+/* KETERANGAN */
+
+.access-modal p{
+  margin:0 auto 20px;
+
+  max-width:380px;
+
+  color:#40566D;
+
+  font-size:15px;
+
+  line-height:1.6;
+}
+
+
+/* INPUT */
+
+.access-input{
+  width:100%;
+
+  padding:14px 16px;
+
+  border:1px solid #DCE7F1;
+
+  border-radius:12px;
+
+  background:#fff;
+
+  color:#12385F;
+
+  font-size:16px;
+
+  text-align:center;
+
+  outline:none;
+
+  transition:.2s ease;
+
+  box-shadow:
+    0 4px 12px rgba(6,54,107,.06);
+}
+
+.access-input::placeholder{
+  color:#9AAABD;
+}
+
+.access-input:focus{
+  border-color:#0757B5;
+
+  box-shadow:
+    0 0 0 4px rgba(7,87,181,.10);
+}
+
+
+/* BUTTON */
+
+.access-actions{
+  display:flex;
+
+  justify-content:center;
+
+  gap:10px;
+
+  margin-top:18px;
+}
+
+.access-btn{
+  border:0;
+
+  padding:11px 20px;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+
+/* BATAL */
+
+.access-btn-cancel{
+  background:#EDF3F8;
+
+  color:#40566D;
+}
+
+.access-btn-cancel:hover{
+  background:#DCE7F1;
+
+  transform:translateY(-1px);
+}
+
+
+/* BUKA AKSES */
+
+.access-btn-confirm{
+  background:#0757B5;
+
+  color:#fff;
+
+  box-shadow:
+    0 6px 16px rgba(7,87,181,.22);
+}
+
+.access-btn-confirm:hover{
+  background:#063F86;
+
+  transform:translateY(-1px);
+}
+
+
+/* ERROR */
+
+#accessError{
+  font-weight:700;
+
+  background:#FFF1F1;
+
+  border:1px solid #FFD0D0;
+
+  border-radius:9px;
+
+  padding:8px 10px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:560px){
+
+  .access-modal{
+    width:92%;
+
+    padding:35px 22px 30px;
+
+    border-radius:20px;
+  }
+
+  .access-icon{
+    width:68px;
+    height:68px;
+
+    font-size:31px;
+
+    margin-bottom:15px;
+  }
+
+  .access-modal h3{
+    font-size:26px;
+  }
+
+  .access-modal p{
+    font-size:14px;
+  }
+
+  .access-input{
+    font-size:15px;
+
+    padding:13px;
+  }
+
+  .access-actions{
+    flex-direction:column;
+  }
+
+  .access-btn{
+    width:100%;
+  }
+}
 
 /* SECTIONS */
 section{padding:44px 0}
@@ -1480,16 +1806,28 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 </div>
 <!-- MODAL AKSES TERLINDUNGI -->
 <div id="accessModal" class="access-overlay" style="display:none;">
+
     <div class="access-modal">
-        
+
+        <button
+            type="button"
+            class="value-close"
+            onclick="closeProtectedAccess()"
+            aria-label="Tutup">
+            ×
+        </button>
+
         <div class="access-icon">
             🔐
         </div>
 
-        <h3 id="accessModalTitle">Akses Terbatas</h3>
+        <h3 id="accessModalTitle">
+            Akses Terbatas
+        </h3>
 
         <p id="accessModalText">
-            Masukkan kode akses untuk membuka menu ini.
+            Menu ini membutuhkan kode akses
+            untuk dapat dibuka.
         </p>
 
         <input
@@ -1501,6 +1839,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
         >
 
         <div class="access-actions">
+
             <button
                 type="button"
                 class="access-btn access-btn-cancel"
@@ -1512,16 +1851,19 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
                 type="button"
                 class="access-btn access-btn-confirm"
                 onclick="verifyProtectedAccess(event)">
-                Buka Akses
+                🔓 Buka Akses
             </button>
+
         </div>
 
-        <div id="accessError"
-             style="display:none; color:#dc2626; margin-top:10px; font-size:13px;">
-            Kode akses salah.
+        <div
+            id="accessError"
+            style="display:none;">
+            Kode akses salah. Silakan coba kembali.
         </div>
 
     </div>
+
 </div>
 <section class="quick" id="akses">
  <div class="container">
