@@ -438,7 +438,110 @@ section{padding:44px 0}
   background:#236BC0;
 }
 .quick-card h3{font-size:16px;margin:0 0 6px}.quick-card p{font-size:13px;line-height:1.5;color:var(--muted);margin:0}.arrow{float:right;color:var(--blue);font-size:22px;font-weight:bold}
+/* =========================================
+   PELAYANAN ICU - EXPAND / COLLAPSE
+========================================= */
 
+.pelayanan-card{
+  cursor:pointer;
+  transition:
+    transform .2s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.pelayanan-card.expanded{
+  border-color:#4A9FE8;
+  box-shadow:0 14px 32px rgba(6,54,107,.16);
+}
+
+.pelayanan-card .arrow{
+  transition:transform .25s ease;
+}
+
+.pelayanan-card.expanded .arrow{
+  transform:rotate(90deg);
+}
+
+
+/* MENU */
+
+.pelayanan-menu{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+
+  margin-top:0;
+
+  transition:
+    max-height .35s ease,
+    opacity .25s ease,
+    margin-top .25s ease;
+}
+
+.pelayanan-card.expanded .pelayanan-menu{
+  max-height:400px;
+  opacity:1;
+  margin-top:16px;
+}
+
+
+/* ITEM MENU */
+
+.pelayanan-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  width:100%;
+
+  padding:10px 11px;
+  margin-top:8px;
+
+  border-radius:10px;
+
+  background:#F3F8FC;
+  border:1px solid #DFEAF4;
+
+  color:var(--navy);
+
+  font-size:13px;
+  font-weight:800;
+
+  transition:.2s ease;
+}
+
+.pelayanan-item:hover{
+  background:#E8F3FC;
+  border-color:#BBD7EC;
+  transform:translateX(3px);
+}
+
+.pelayanan-item-icon{
+  width:30px;
+  height:30px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:#E1EFFB;
+  color:#0757B5;
+
+  font-size:16px;
+
+  flex-shrink:0;
+}
+
+.pelayanan-item b{
+  margin-left:auto;
+
+  color:var(--blue);
+
+  font-size:19px;
+  font-weight:400;
+}
 /* NEWS */
 .two-col{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
 .panel{padding:22px}.panel h2{margin:0;color:var(--navy);font-size:22px}
@@ -1376,10 +1479,11 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   <div class="section-head"><h2>▦ Akses Cepat</h2><p>Pilih menu berikut untuk menuju informasi yang Anda butuhkan.</p></div>
   <div class="quick-grid">
 <!-- 1. Pelayanan ICU -->
-<a class="card quick-card"
-   href="URL_DRIVE_PELAYANAN_ICU"
-   target="_blank"
-   rel="noopener noreferrer">
+<div class="card quick-card pelayanan-card"
+     id="pelayananICU"
+     role="button"
+     tabindex="0"
+     aria-expanded="false">
 
   <span class="arrow">›</span>
 
@@ -1390,14 +1494,64 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   </div>
 
   <h3>Pelayanan ICU</h3>
+
   <p>Informasi layanan, alur, dan fasilitas.</p>
 
-</a>
+  <!-- SUBMENU PELAYANAN ICU -->
+  <div class="pelayanan-menu" id="pelayananMenu">
+
+    <a href="https://docs.google.com/spreadsheets/d/1l0VH_dJ7qg1f7g54m5xMxsewnpSw6w6toVTwFRjCblI/edit?gid=444736748#gid=444736748"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="pelayanan-item">
+
+      <span class="pelayanan-item-icon">⇄</span>
+      <span>Timbang terima</span>
+      <b>›</b>
+
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1PFnSPY_T9tUJsrEcoqWS6WPD1oVDQ94rpQ89qLM2gJg/edit?gid=2060929926#gid=2060929926"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="pelayanan-item">
+
+      <span class="pelayanan-item-icon">♡</span>
+      <span>Update diagnosa</span>
+      <b>›</b>
+
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1JvE-DEzUjOesa2V2BqiI1gx6lxSDsl6N"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="pelayanan-item">
+
+      <span class="pelayanan-item-icon">⌂</span>
+      <span>Persiapan Homecare</span>
+      <b>›</b>
+
+    </a>
+
+    <a href="URL_PETA_FASILITAS"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="pelayanan-item">
+
+      <span class="pelayanan-item-icon">⌖</span>
+      <span>Peta &amp; fasilitas ruangan</span>
+      <b>›</b>
+
+    </a>
+
+  </div>
+
+</div>
 
 
 <!-- 2. Clinical Decision Support -->
 <a class="card quick-card"
-   href="URL_DRIVE_CLINICAL"
+   href="https://rioyanuar1-gif.github.io/icuscalescore/"
    target="_blank"
    rel="noopener noreferrer">
 
@@ -1464,7 +1618,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 <!-- 5. SOP & Pedoman -->
 <a class="card quick-card"
-   href="URL_DRIVE_SOP"
+   href="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
    target="_blank"
    rel="noopener noreferrer">
 
@@ -1675,6 +1829,47 @@ document.querySelector('.search input').addEventListener('input',function(){
    el.style.display=(!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
  });
 });
+/* =================================
+   PELAYANAN ICU - EXPAND / COLLAPSE
+================================= */
+
+const pelayananICU =
+  document.getElementById("pelayananICU");
+
+pelayananICU.addEventListener("click", function(e){
+
+  /*
+    Jika yang diklik adalah submenu,
+    biarkan link berjalan dan jangan
+    membuka/menutup kartu.
+  */
+  if(e.target.closest(".pelayanan-item")){
+    return;
+  }
+
+  const isExpanded =
+    pelayananICU.classList.toggle("expanded");
+
+  pelayananICU.setAttribute(
+    "aria-expanded",
+    isExpanded ? "true" : "false"
+  );
+
+});
+
+
+/* Dukungan keyboard */
+pelayananICU.addEventListener("keydown", function(e){
+
+  if(e.key === "Enter" || e.key === " "){
+
+    e.preventDefault();
+
+    pelayananICU.click();
+
+  }
+
+}); 
  /* =========================
    JAM DIGITAL & KALENDER
 ========================= */
