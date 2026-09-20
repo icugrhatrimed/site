@@ -2232,70 +2232,100 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
         <div class="modal-line"></div>
 
 
-        <!-- PILIH TAHUN -->
+<!-- ===============================
+     PILIH UNIT ICU
+================================ -->
 
-        <div id="tahunMutu" class="mutu-selection">
+<div id="unitMutu" class="mutu-selection">
 
-            <button
-                class="mutu-option"
-                onclick="selectMutuYear(2026)">
-                <span>📅</span>
-                <b>2026</b>
-            </button>
+    <button
+        class="mutu-option"
+        onclick="selectMutuUnit('ICU Grha Trimed 1')">
+        <span>🏥</span>
+        <b>ICU Grha Trimed 1</b>
+    </button>
 
-            <button
-                class="mutu-option"
-                onclick="selectMutuYear(2025)">
-                <span>📅</span>
-                <b>2025</b>
-            </button>
+    <button
+        class="mutu-option"
+        onclick="selectMutuUnit('ICU Grha Trimed 2')">
+        <span>🏥</span>
+        <b>ICU Grha Trimed 2</b>
+    </button>
 
-            <button
-                class="mutu-option"
-                onclick="selectMutuYear(2024)">
-                <span>📅</span>
-                <b>2024</b>
-            </button>
-
-        </div>
+</div>
 
 
-        <!-- PILIH TRIWULAN -->
+<!-- ===============================
+     PILIH TAHUN
+================================ -->
 
-        <div
-            id="triwulanMutu"
-            class="mutu-selection"
-            style="display:none;">
+<div
+    id="tahunMutu"
+    class="mutu-selection"
+    style="display:none;">
 
-            <button
-                class="mutu-option"
-                onclick="openMutuSlideshow(1)">
-                <span>1</span>
-                <b>Triwulan I</b>
-            </button>
+    <button
+        class="mutu-option"
+        onclick="selectMutuYear(2026)">
+        <span>📅</span>
+        <b>2026</b>
+    </button>
 
-            <button
-                class="mutu-option"
-                onclick="openMutuSlideshow(2)">
-                <span>2</span>
-                <b>Triwulan II</b>
-            </button>
+    <button
+        class="mutu-option"
+        onclick="selectMutuYear(2025)">
+        <span>📅</span>
+        <b>2025</b>
+    </button>
 
-            <button
-                class="mutu-option"
-                onclick="openMutuSlideshow(3)">
-                <span>3</span>
-                <b>Triwulan III</b>
-            </button>
+    <button
+        class="mutu-option"
+        onclick="selectMutuYear(2024)">
+        <span>📅</span>
+        <b>2024</b>
+    </button>
 
-            <button
-                class="mutu-option"
-                onclick="openMutuSlideshow(4)">
-                <span>4</span>
-                <b>Triwulan IV</b>
-            </button>
+</div>
 
-        </div>
+
+<!-- ===============================
+     PILIH TRIWULAN
+================================ -->
+
+<div
+    id="triwulanMutu"
+    class="mutu-selection"
+    style="display:none;">
+
+    <button
+        class="mutu-option"
+        onclick="openMutuSlideshow(1)">
+        <span>1</span>
+        <b>Triwulan I</b>
+    </button>
+
+    <button
+        class="mutu-option"
+        onclick="openMutuSlideshow(2)">
+        <span>2</span>
+        <b>Triwulan II</b>
+    </button>
+
+    <button
+        class="mutu-option"
+        onclick="openMutuSlideshow(3)">
+        <span>3</span>
+        <b>Triwulan III</b>
+    </button>
+
+    <button
+        class="mutu-option"
+        onclick="openMutuSlideshow(4)">
+        <span>4</span>
+        <b>Triwulan IV</b>
+    </button>
+
+</div>
 
     </div>
 
@@ -2489,9 +2519,9 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 <!-- 3. Mutu & Keselamatan -->
 <a class="card quick-card"
-   href="URL_DRIVE_MUTU"
-   target="_blank"
-   rel="noopener noreferrer">
+   href="#"
+   onclick="openMutuSingleImage(event)"
+   aria-label="Buka Mutu dan Keselamatan Pasien">
 
   <span class="arrow">›</span>
 
@@ -2852,10 +2882,13 @@ if(enteredCode === correctCode){
    DASHBOARD MUTU
 ================================= */
 
+let selectedMutuUnit = null;
 let selectedMutuYear = null;
 
 
-/* BUKA DASHBOARD MUTU */
+/* ===============================
+   BUKA DASHBOARD MUTU
+================================ */
 
 function openMutuDashboard(){
 
@@ -2863,10 +2896,13 @@ function openMutuDashboard(){
         document.getElementById("mutuModal");
 
     document.getElementById("mutuModalTitle")
-        .textContent = "Pilih Tahun";
+        .textContent = "Pilih Unit ICU";
+
+    document.getElementById("unitMutu")
+        .style.display = "grid";
 
     document.getElementById("tahunMutu")
-        .style.display = "grid";
+        .style.display = "none";
 
     document.getElementById("triwulanMutu")
         .style.display = "none";
@@ -2875,7 +2911,29 @@ function openMutuDashboard(){
 }
 
 
-/* PILIH TAHUN */
+/* ===============================
+   PILIH UNIT ICU
+================================ */
+
+function selectMutuUnit(unit){
+
+    selectedMutuUnit = unit;
+
+    document.getElementById("mutuModalTitle")
+        .textContent = unit;
+
+    document.getElementById("unitMutu")
+        .style.display = "none";
+
+    document.getElementById("tahunMutu")
+        .style.display = "grid";
+
+}
+
+
+/* ===============================
+   PILIH TAHUN
+================================ */
 
 function selectMutuYear(year){
 
@@ -2883,17 +2941,20 @@ function selectMutuYear(year){
 
     document.getElementById("mutuModalTitle")
         .textContent =
-        "Triwulan " + year;
+        `${selectedMutuUnit} — ${year}`;
 
     document.getElementById("tahunMutu")
         .style.display = "none";
 
     document.getElementById("triwulanMutu")
         .style.display = "grid";
+
 }
 
 
-/* TUTUP DASHBOARD MUTU */
+/* ===============================
+   TUTUP DASHBOARD MUTU
+================================ */
 
 function closeMutuModal(){
 
@@ -2903,15 +2964,22 @@ function closeMutuModal(){
 }
 
 
-/* PILIH TRIWULAN */
+/* ===============================
+   PILIH TRIWULAN
+================================ */
 
 function openMutuSlideshow(triwulan){
 
+    const unit = selectedMutuUnit;
     const year = selectedMutuYear;
 
     closeMutuModal();
 
-    openMutuViewer(year, triwulan);
+    openMutuViewer(
+        unit,
+        year,
+        triwulan
+    );
 
 }
 /* =================================
@@ -2921,37 +2989,117 @@ function openMutuSlideshow(triwulan){
 let mutuSlides = [];
 let currentMutuSlide = 0;
 
-function getMutuSlides(year, triwulan){
 
-    return [
-        {
-            image: `mutu/${year}/tw${triwulan}/01.jpg`,
-            title: `Laporan Mutu ${year} - Triwulan ${triwulan}`
-        },
-        {
-            image: `mutu/${year}/tw${triwulan}/02.jpg`,
-            title: `Indikator Mutu`
-        },
-        {
-            image: `mutu/${year}/tw${triwulan}/03.jpg`,
-            title: `Capaian Mutu`
-        },
-        {
-            image: `mutu/${year}/tw${triwulan}/04.jpg`,
-            title: `Evaluasi dan Tindak Lanjut`
+/* =================================
+   DATABASE URL GAMBAR GOOGLE DRIVE
+================================= */
+
+const mutuDriveData = {
+
+    "ICU Grha Trimed 1": {
+
+        2026: {
+
+            1: [
+                "https://drive.google.com/uc?export=view&id=1ym9J-jcIDJv8xdqclXwHoS6o2EId-P3T",
+                "https://drive.google.com/uc?export=view&id=1vzWGA2pcUAMPX-eedbEuZy_BWD9Ia6ek",
+                "https://drive.google.com/uc?export=view&id=1bX1HlOHqqWv1jm2u3EEmjArH6EGwW5S7",
+                "https://drive.google.com/uc?export=view&id=1gLTvsBVjpw54KReSp3ggOmytQnCV8zlQ",
+                "https://drive.google.com/uc?export=view&id=1AV4_s9rHW9B1JdlS9m0z6i-TBe0A28iG",
+                "https://drive.google.com/uc?export=view&id=1DBK6WnTJ0_dw_Dbz_FDJtpGh6WtnLN5f"
+            ],
+
+            2: [
+                "https://drive.google.com/uc?export=view&id=1mEDQ-bkun-M7_cBfV2EuBRm9GOguDfAx",
+                "https://drive.google.com/uc?export=view&id=1yZfJ6bHTQTaZfH8IfCNQKfd_QQsmn2fb",
+                "https://drive.google.com/uc?export=view&id=16f-kVLpOSfwQjTssBICse1oG7_QV9L0Y",
+                "https://drive.google.com/uc?export=view&id=1MBHFyHaMOlcH3z3a-LG_jMlPvm3AfxEx",
+                "https://drive.google.com/uc?export=view&id=1rqpwCeHd89NZw1qq46hrS5lAYzJudmpH"
+            ],
+
+            3: [
+                "URL_GAMBAR_DRIVE_9",
+                "URL_GAMBAR_DRIVE_10"
+            ],
+
+            4: [
+                "URL_GAMBAR_DRIVE_11",
+                "URL_GAMBAR_DRIVE_12"
+            ]
+
         }
-    ];
+
+    },
+
+
+    "ICU Grha Trimed 2": {
+
+        2026: {
+
+            1: [
+                "URL_GAMBAR_DRIVE_13",
+                "URL_GAMBAR_DRIVE_14"
+            ],
+
+            2: [
+                "URL_GAMBAR_DRIVE_15",
+                "URL_GAMBAR_DRIVE_16"
+            ],
+
+            3: [
+                "URL_GAMBAR_DRIVE_17"
+            ],
+
+            4: [
+                "URL_GAMBAR_DRIVE_18"
+            ]
+
+        }
+
+    }
+
+};
+
+
+/* =================================
+   AMBIL DATA SLIDE
+================================= */
+
+function getMutuSlides(unit, year, triwulan){
+
+    const images =
+        mutuDriveData?.[unit]?.[year]?.[triwulan] || [];
+
+    return images.map((image,index)=>({
+
+        image:image,
+
+        title:
+            `${unit} — Laporan Mutu ${year} Triwulan ${triwulan}`
+
+    }));
 
 }
 
-function openMutuViewer(year, triwulan){
 
-    mutuSlides = getMutuSlides(year, triwulan);
+/* =================================
+   BUKA VIEWER
+================================= */
+
+function openMutuViewer(unit, year, triwulan){
+
+    mutuSlides =
+        getMutuSlides(
+            unit,
+            year,
+            triwulan
+        );
 
     currentMutuSlide = 0;
 
-    document.getElementById("viewerTitle").textContent =
-        `Laporan Mutu ${year} — Triwulan ${triwulan}`;
+    document.getElementById("viewerTitle")
+        .textContent =
+        `${unit} — ${year} — Triwulan ${triwulan}`;
 
     document.getElementById("mutuViewer")
         .classList.add("show");
@@ -2960,25 +3108,47 @@ function openMutuViewer(year, triwulan){
 
 }
 
+
+/* =================================
+   TAMPILKAN SLIDE
+================================= */
+
 function renderMutuSlide(){
 
-    if(!mutuSlides.length) return;
+    if(!mutuSlides.length){
 
-    const slide = mutuSlides[currentMutuSlide];
+        document.getElementById("mutuSlideImage")
+            .removeAttribute("src");
 
-    document.getElementById("mutuSlideImage").src =
-        slide.image;
+        document.getElementById("mutuSlideCaption")
+            .textContent =
+            "Belum ada laporan yang tersedia.";
 
-    document.getElementById("mutuSlideImage").alt =
-        slide.title;
+        document.getElementById("mutuSlideDots")
+            .innerHTML = "";
 
-    document.getElementById("mutuSlideCaption").textContent =
+        return;
+    }
+
+    const slide =
+        mutuSlides[currentMutuSlide];
+
+    document.getElementById("mutuSlideImage")
+        .src = slide.image;
+
+    document.getElementById("mutuSlideImage")
+        .alt = slide.title;
+
+    document.getElementById("mutuSlideCaption")
+        .textContent =
         `${slide.title} — ${currentMutuSlide + 1} / ${mutuSlides.length}`;
+
 
     const dots =
         document.getElementById("mutuSlideDots");
 
     dots.innerHTML = "";
+
 
     mutuSlides.forEach((item,index)=>{
 
@@ -2986,7 +3156,9 @@ function renderMutuSlide(){
             document.createElement("span");
 
         if(index === currentMutuSlide){
+
             dot.classList.add("active");
+
         }
 
         dots.appendChild(dot);
@@ -2995,22 +3167,38 @@ function renderMutuSlide(){
 
 }
 
+
+/* =================================
+   NEXT / PREVIOUS
+================================= */
+
 function changeMutuSlide(direction){
+
+    if(!mutuSlides.length) return;
 
     currentMutuSlide += direction;
 
     if(currentMutuSlide < 0){
+
         currentMutuSlide =
             mutuSlides.length - 1;
+
     }
 
     if(currentMutuSlide >= mutuSlides.length){
+
         currentMutuSlide = 0;
+
     }
 
     renderMutuSlide();
 
 }
+
+
+/* =================================
+   TUTUP VIEWER
+================================= */
 
 function closeMutuViewer(){
 
@@ -3286,6 +3474,30 @@ document.addEventListener("keydown",function(e){
   }
 
 }); 
+/* =================================
+   MUTU & KESELAMATAN - SINGLE IMAGE
+================================= */
+
+function openMutuSingleImage(event){
+
+    event.preventDefault();
+
+    mutuSlides = [
+        {
+            image: "https://drive.google.com/uc?export=view&id=1z6eWFBXMStOCyRf2EikAkkSnHpMu35dx",
+            title: "Mutu & Keselamatan Pasien"
+        }
+    ];
+
+    currentMutuSlide = 0;
+
+    document.getElementById("viewerTitle").textContent =
+        "Mutu & Keselamatan Pasien";
+
+    document.getElementById("mutuViewer").classList.add("show");
+
+    renderMutuSlide();
+}
 </script>
 </body>
 </html>
