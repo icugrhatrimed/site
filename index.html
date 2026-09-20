@@ -355,6 +355,10 @@ a{text-decoration:none;color:inherit}
   background:var(--yellow);
   transform:rotate(90deg);
 }
+/* TAMBAHKAN CSS MODAL AKSES DI SINI */
+
+/* SECTIONS */
+section{padding:44px 0}
 /* SECTIONS */
 section{padding:44px 0}
 .section-head{margin-bottom:20px}
@@ -1474,6 +1478,51 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   </div>
 
 </div>
+<!-- MODAL AKSES TERLINDUNGI -->
+<div id="accessModal" class="access-overlay" style="display:none;">
+    <div class="access-modal">
+        
+        <div class="access-icon">
+            🔐
+        </div>
+
+        <h3 id="accessModalTitle">Akses Terbatas</h3>
+
+        <p id="accessModalText">
+            Masukkan kode akses untuk membuka menu ini.
+        </p>
+
+        <input
+            type="password"
+            id="accessCode"
+            class="access-input"
+            placeholder="Masukkan kode akses"
+            autocomplete="off"
+        >
+
+        <div class="access-actions">
+            <button
+                type="button"
+                class="access-btn access-btn-cancel"
+                onclick="closeProtectedAccess()">
+                Batal
+            </button>
+
+            <button
+                type="button"
+                class="access-btn access-btn-confirm"
+                onclick="verifyProtectedAccess(event)">
+                Buka Akses
+            </button>
+        </div>
+
+        <div id="accessError"
+             style="display:none; color:#dc2626; margin-top:10px; font-size:13px;">
+            Kode akses salah.
+        </div>
+
+    </div>
+</div>
 <section class="quick" id="akses">
  <div class="container">
   <div class="section-head"><h2>▦ Akses Cepat</h2><p>Pilih menu berikut untuk menuju informasi yang Anda butuhkan.</p></div>
@@ -1500,10 +1549,14 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   <!-- SUBMENU PELAYANAN ICU -->
   <div class="pelayanan-menu" id="pelayananMenu">
 
-    <a href="https://docs.google.com/spreadsheets/d/1l0VH_dJ7qg1f7g54m5xMxsewnpSw6w6toVTwFRjCblI/edit?gid=444736748#gid=444736748"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="pelayanan-item">
+<a href="#"
+   class="pelayanan-item"
+   data-protected="true"
+   data-access-name="Timbang Terima"
+   data-access-icon="⇄"
+   data-access-code="Pegawai_2026"
+   data-access-url="https://docs.google.com/spreadsheets/d/1l0VH_dJ7qg1f7g54m5xMxsewnpSw6w6toVTwFRjCblI/edit?gid=444736748#gid=444736748"
+   onclick="openProtectedAccess(event, this)">
 
       <span class="pelayanan-item-icon">⇄</span>
       <span>Timbang terima</span>
@@ -1511,10 +1564,14 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1PFnSPY_T9tUJsrEcoqWS6WPD1oVDQ94rpQ89qLM2gJg/edit?gid=2060929926#gid=2060929926"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="pelayanan-item">
+<a href="#"
+   class="pelayanan-item"
+   data-protected="true"
+   data-access-name="Update Diagnosa"
+   data-access-icon="♡"
+   data-access-code="Pegawai_2026"
+   data-access-url="https://docs.google.com/spreadsheets/d/1PFnSPY_T9tUJsrEcoqWS6WPD1oVDQ94rpQ89qLM2gJg/edit"
+   onclick="openProtectedAccess(event, this)">
 
       <span class="pelayanan-item-icon">♡</span>
       <span>Update diagnosa</span>
@@ -1594,8 +1651,14 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 
 <!-- 4. SDM & Jadwal -->
-<a class="card quick-card"
-   href="https://docs.google.com/spreadsheets/d/13owMXnb5Y2CE1tKPKOHfD9XH2EJY8PQQBE1UhbdGV_M/edit?gid=946082641#gid=946082641"
+   <a class="card quick-card"
+   href="#"
+   data-protected="true"
+   data-access-name="SDM & Jadwal"
+   data-access-icon="♟"
+   data-access-code="Pegawai_2026"
+   data-access-url="https://docs.google.com/spreadsheets/d/13owMXnb5Y2CE1tKPKOHfD9XH2EJY8PQQBE1UhbdGV_M/edit?gid=793080063#gid=793080063"
+   onclick="openProtectedAccess(event, this)">
    target="_blank"
    rel="noopener noreferrer">
 
@@ -1617,8 +1680,14 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 
 <!-- 5. SOP & Pedoman -->
-<a class="card quick-card"
-   href="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
+   <a class="card quick-card"
+   href="#"
+   data-protected="true"
+   data-access-name="SOP & Pedoman"
+   data-access-icon="▤"
+   data-access-code="Pegawai_2026"
+   data-access-url="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
+   onclick="openProtectedAccess(event, this)">
    target="_blank"
    rel="noopener noreferrer">
 
@@ -1829,6 +1898,10 @@ document.querySelector('.search input').addEventListener('input',function(){
    el.style.display=(!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
  });
 });
+document.querySelector('.search input').addEventListener(...);
+
+
+/* TAMBAHKAN JAVASCRIPT PASSWORD DI SINI */
 /* =================================
    PELAYANAN ICU - EXPAND / COLLAPSE
 ================================= */
