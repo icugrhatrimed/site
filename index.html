@@ -36,8 +36,17 @@ a{text-decoration:none;color:inherit}
 }
 .search{width:245px;background:#F2F6FA;border:1px solid var(--line);border-radius:28px;padding:11px 15px;display:flex;gap:8px}
 .search input{width:100%;border:0;outline:0;background:transparent;color:var(--text)}
-.navbar{background:var(--navy);color:#fff}
-.nav{display:flex;overflow-x:auto;scrollbar-width:none}
+.navbar{
+  background:var(--navy);
+  color:#fff;
+  position:relative;
+  z-index:1000;
+}
+.nav{
+  display:flex;
+  overflow:visible;
+  scrollbar-width:none;
+}
 .nav::-webkit-scrollbar{display:none}
 .nav a{
   padding:15px 22px;
