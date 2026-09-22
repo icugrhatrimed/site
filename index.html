@@ -2249,7 +2249,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
       <!-- PASIEN -->
       <a
         class="dokumen-option"
-        href="LINK_GOOGLE_DRIVE_PASIEN"
+        href="https://drive.google.com/file/d/1Aoy9E1k2T7HbGXKl8jnkZXwidW5J2mFn/view"
         target="_blank"
         rel="noopener noreferrer">
 
@@ -2528,7 +2528,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
    data-access-name="Register Pasien"
    data-access-icon="▣"
    data-access-code="Pegawai_2026"
-   data-access-url="URL_REGISTER_PASIEN"
+   data-access-url="https://docs.google.com/spreadsheets/d/1uHqYavf_rs9XMdn5KVMff-yPKJkjl6gZnm-OzxzEUxI/edit?gid=748705730#gid=748705730"
    onclick="openProtectedAccess(event, this)">
 
   <span class="pelayanan-item-icon">▣</span>
@@ -2704,7 +2704,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 </a>
 
 
-<!-- 7. Medication Safety -->
+<!-- 7. Medication Safety & AIRA-->
 <a class="card quick-card"
    href="https://airabylimbat.github.io/"
    target="_blank"
@@ -2721,7 +2721,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
     </svg>
   </div>
 
-  <h3>Medication Safety</h3>
+  <h3>Medication Safety & AIRA</h3>
   <p>High-alert, panduan dosis, dan label obat.</p>
 
 </a>
@@ -3590,6 +3590,41 @@ function openMutuSingleImage(event){
 
     renderMutuSlide();
 }
+
+/* =================================
+   MODAL DOKUMEN
+================================= */
+
+function openDokumenMenu(){
+
+  document
+    .getElementById("dokumenMenu")
+    .classList.add("show");
+
+}
+
+
+function closeDokumenMenu(){
+
+  document
+    .getElementById("dokumenMenu")
+    .classList.remove("show");
+
+}
+
+
+/* Klik area gelap untuk menutup */
+
+document
+  .getElementById("dokumenMenu")
+  .addEventListener("click", function(e){
+
+    if(e.target === this){
+      closeDokumenMenu();
+    }
+
+  });
+ 
 </script>
 </body>
 </html>
