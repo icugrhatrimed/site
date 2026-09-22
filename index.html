@@ -49,6 +49,59 @@ a{text-decoration:none;color:inherit}
 }
 .nav a:hover,.nav a.active{background:var(--yellow);color:#173B63}
 
+/* ==============================
+   DROPDOWN DOKUMEN
+============================== */
+
+.nav-dropdown{
+  position:relative;
+}
+
+.dokumen-dropdown{
+  position:absolute;
+  top:100%;
+  left:0;
+  width:190px;
+
+  background:#ffffff;
+  border-radius:0 0 10px 10px;
+
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+  overflow:hidden;
+  display:none;
+
+  z-index:10000;
+}
+
+.dokumen-dropdown.show{
+  display:block;
+}
+
+.dokumen-dropdown a{
+  display:block;
+  padding:16px 20px;
+
+  color:var(--navy);
+  background:#fff;
+
+  text-decoration:none;
+  font-weight:700;
+
+  border-bottom:1px solid #e5edf5;
+
+  transition:.2s ease;
+}
+
+.dokumen-dropdown a:last-child{
+  border-bottom:none;
+}
+
+.dokumen-dropdown a:hover{
+  background:#F1F7FC;
+  color:#0757B5;
+}
+ 
 /* HERO */
 .hero{
   background:
@@ -2079,9 +2132,30 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
       Library
     </a>
 
-    <a href="javascript:void(0)" onclick="openDokumenMenu()">
-      Dokumen
+<div class="nav-dropdown">
+
+  <a href="javascript:void(0)"
+     onclick="toggleDokumenMenu()">
+    Dokumen
+  </a>
+
+  <div id="dokumenDropdown" class="dokumen-dropdown">
+
+    <a href="LINK_GOOGLE_DRIVE_PASIEN"
+       target="_blank"
+       rel="noopener noreferrer">
+      Pasien
     </a>
+
+    <a href="https://drive.google.com/drive/folders/1NvassmBmTcdfy5Xx9PrSnJzJDthtEyI5"
+       target="_blank"
+       rel="noopener noreferrer">
+      Karyawan
+    </a>
+
+  </div>
+
+</div>
 
     <a href="javascript:void(0)" onclick="openGaleriMenu()">
       Galeri
@@ -3592,38 +3666,34 @@ function openMutuSingleImage(event){
 }
 
 /* =================================
-   MODAL DOKUMEN
+   DROPDOWN DOKUMEN
 ================================= */
 
-function openDokumenMenu(){
+function toggleDokumenMenu(){
 
-  document
-    .getElementById("dokumenMenu")
-    .classList.add("show");
+  const menu =
+    document.getElementById("dokumenDropdown");
 
-}
-
-
-function closeDokumenMenu(){
-
-  document
-    .getElementById("dokumenMenu")
-    .classList.remove("show");
+  menu.classList.toggle("show");
 
 }
 
 
-/* Klik area gelap untuk menutup */
+/* Klik di luar dropdown → tutup */
 
-document
-  .getElementById("dokumenMenu")
-  .addEventListener("click", function(e){
+document.addEventListener("click", function(e){
 
-    if(e.target === this){
-      closeDokumenMenu();
-    }
+  const dropdown =
+    document.querySelector(".nav-dropdown");
 
-  });
+  const menu =
+    document.getElementById("dokumenDropdown");
+
+  if(dropdown && !dropdown.contains(e.target)){
+    menu.classList.remove("show");
+  }
+
+});
  
 </script>
 </body>
