@@ -39,7 +39,14 @@ a{text-decoration:none;color:inherit}
 .navbar{background:var(--navy);color:#fff}
 .nav{display:flex;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
-.nav a{padding:14px 15px;font-size:14px;font-weight:700;white-space:nowrap}
+.nav a{
+  padding:15px 22px;
+  font-size:15px;
+  font-weight:700;
+  white-space:nowrap;
+  display:block;
+  transition:.2s ease;
+}
 .nav a:hover,.nav a.active{background:var(--yellow);color:#173B63}
 
 /* HERO */
@@ -2061,19 +2068,27 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   <img class="logo-wecare" src="logo-wecare.png" alt="WE CARE">
   <label class="search">🔎 <input type="search" placeholder="Cari informasi..." aria-label="Cari informasi"></label>
  </div>
- <div class="navbar">
+<div class="navbar">
   <div class="container nav">
-   <a class="active" href="#beranda">⌂ Beranda</a>
-   <a href="#profil">👤 Profil</a>
-   <a href="#pelayanan">♥ Pelayanan</a>
-   <a href="#clinical">▣ Clinical Tools</a>
-   <a href="#mutu">✓ Mutu & Keselamatan</a>
-   <a href="#sdm">♟ SDM</a>
-   <a href="#dokumen">▤ SOP & Dokumen</a>
-   <a href="#galeri">▧ Galeri</a>
-   <a href="#kontak">☎ Kontak</a>
+
+    <a class="active" href="#beranda">Beranda</a>
+
+    <a href="#profil">Profil</a>
+
+    <a href="javascript:void(0)" onclick="openLibraryMenu()">
+      Library
+    </a>
+
+    <a href="javascript:void(0)" onclick="openDokumenMenu()">
+      Dokumen
+    </a>
+
+    <a href="javascript:void(0)" onclick="openGaleriMenu()">
+      Galeri
+    </a>
+
   </div>
- </div>
+</div>
 </header>
 
 <main id="beranda">
@@ -2204,7 +2219,62 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 </div>
 
+<!-- MODAL DOKUMEN -->
 
+<div id="dokumenMenu" class="value-overlay">
+
+  <div class="value-modal">
+
+    <button
+      class="value-close"
+      onclick="closeDokumenMenu()"
+      aria-label="Tutup">
+      ×
+    </button>
+
+    <div class="value-modal-icon">
+      D
+    </div>
+
+    <div class="value-modal-label">
+      DOKUMEN ICU GRHA TRIMED
+    </div>
+
+    <h2>Pilih Dokumen</h2>
+
+    <div class="modal-line"></div>
+
+    <div class="dokumen-selection">
+
+      <!-- PASIEN -->
+      <a
+        class="dokumen-option"
+        href="LINK_GOOGLE_DRIVE_PASIEN"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        <strong>Pasien</strong>
+        <span>Dokumen dan formulir pasien</span>
+
+      </a>
+
+      <!-- KARYAWAN -->
+      <a
+        class="dokumen-option"
+        href="https://drive.google.com/drive/folders/1NvassmBmTcdfy5Xx9PrSnJzJDthtEyI5"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        <strong>Karyawan</strong>
+        <span>Dokumen dan formulir karyawan</span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
 <!-- MODAL DASHBOARD MUTU -->
 <div id="mutuModal" class="mutu-overlay">
 
@@ -2455,6 +2525,21 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 <a href="#"
    class="pelayanan-item"
    data-protected="true"
+   data-access-name="Register Pasien"
+   data-access-icon="▣"
+   data-access-code="Pegawai_2026"
+   data-access-url="URL_REGISTER_PASIEN"
+   onclick="openProtectedAccess(event, this)">
+
+  <span class="pelayanan-item-icon">▣</span>
+  <span>Register Pasien</span>
+  <b>›</b>
+
+</a>
+   
+<a href="#"
+   class="pelayanan-item"
+   data-protected="true"
    data-access-name="Update Diagnosa"
    data-access-icon="♡"
    data-access-code="Pegawai_2026"
@@ -2621,7 +2706,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 <!-- 7. Medication Safety -->
 <a class="card quick-card"
-   href="URL_DRIVE_MEDICATION"
+   href="https://airabylimbat.github.io/"
    target="_blank"
    rel="noopener noreferrer">
 
@@ -2702,7 +2787,15 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
     <span>SIM Pelaporan Insiden</span>
     <b>›</b>
   </a>
-
+ 
+  <a href="http://172.16.10.27/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="related-link">
+    <span>SIM Kepegawaian</span>
+    <b>›</b>
+  </a>
+ 
   <a href="https://drive.google.com/drive/folders/1p9n3PdJQXw9ZstqzB4di2JtFtvUSa5TN"
      target="_blank"
      rel="noopener noreferrer"
@@ -2711,27 +2804,19 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
     <b>›</b>
   </a>
 
-  <a href="http://172.16.10.27/"
+   <a href="https://farmasi.rumahsakit.unair.ac.id/farm/Login"
      target="_blank"
      rel="noopener noreferrer"
      class="related-link">
-    <span>SIM Kepegawaian</span>
+    <span>Perencanaan BHP</span>
     <b>›</b>
   </a>
 
-  <a href="https://airabylimbat.github.io/"
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdYo4sF9hvQEJbWq2OZVQIevPsYmE-K6L8IE2eP2P7AMzO1uA/viewform"
      target="_blank"
      rel="noopener noreferrer"
      class="related-link">
-    <span>AIRA</span>
-    <b>›</b>
-  </a>
-
-  <a href="https://rioyanuar1-gif.github.io/icuscalescore/"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="related-link">
-    <span>ICU Smart CDSS</span>
+    <span>Upload permohonan izin</span>
     <b>›</b>
   </a>
 
