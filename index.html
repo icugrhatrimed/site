@@ -1525,7 +1525,13 @@ section{padding:44px 0}
 /* FOOTER */
 footer{background:var(--navy2);color:#fff;border-top:4px solid var(--yellow);padding:30px 0}
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:25px;align-items:center}
-.footer-logo{width:260px;max-width:100%;filter:none;}
+.footer-logo{
+  width:260px;
+  max-width:100%;
+  filter:
+    drop-shadow(0 0 2px #fff)
+    drop-shadow(0 0 4px rgba(255,255,255,.45));
+}
 footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:right}.footer-right b{color:var(--yellow)}
 .copyright{border-top:1px solid rgba(255,255,255,.15);margin-top:22px;padding-top:17px;font-size:12px;color:#BBD0E3}
 
