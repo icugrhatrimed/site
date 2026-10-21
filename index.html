@@ -2248,8 +2248,13 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   </div>
 
 </div>
-<!-- MODAL AKSES TERLINDUNGI -->
-<div id="accessModal" class="access-overlay" style="display:none;">
+<!-- =========================================
+     MODAL AKSES TERLINDUNGI
+     KODE AKSES LAMA TETAP DIPERTAHANKAN
+========================================= -->
+<div id="accessModal"
+     class="access-overlay"
+     style="display:none;">
 
     <div class="access-modal">
 
@@ -2261,9 +2266,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
             ×
         </button>
 
-        <div class="access-icon">
-            🔐
-        </div>
+        <div class="access-icon">🔐</div>
 
         <h3 id="accessModalTitle">
             Akses Terbatas
@@ -2279,8 +2282,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
             id="accessCode"
             class="access-input"
             placeholder="Masukkan kode akses"
-            autocomplete="off"
-        >
+            autocomplete="off">
 
         <div class="access-actions">
 
@@ -2300,15 +2302,72 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
         </div>
 
-        <div
-            id="accessError"
-            style="display:none;">
+        <div id="accessError" style="display:none;">
             Kode akses salah. Silakan coba kembali.
         </div>
 
     </div>
-
 </div>
+
+
+<!-- =========================================
+     MODAL PILIH VERSI SOP & PEDOMAN
+========================================= -->
+<div id="sopVersionModal"
+     class="access-overlay"
+     style="display:none;"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="sopVersionTitle">
+
+    <div class="access-modal">
+
+        <button
+            type="button"
+            class="value-close"
+            onclick="closeSopVersionModal()"
+            aria-label="Tutup">
+            ×
+        </button>
+
+        <div class="access-icon">📚</div>
+
+        <h3 id="sopVersionTitle">
+            SOP & Pedoman
+        </h3>
+
+        <p>
+            Silakan pilih versi dokumen yang ingin dibuka.
+        </p>
+
+        <div style="display:grid; gap:12px; margin-top:18px;">
+
+            <button
+                type="button"
+                class="access-btn access-btn-confirm"
+                onclick="openSopVersion('2022')">
+                📄 Versi 2022
+            </button>
+
+            <button
+                type="button"
+                class="access-btn access-btn-confirm"
+                onclick="openSopVersion('2026')">
+                📁 Versi 2026
+            </button>
+
+            <button
+                type="button"
+                class="access-btn access-btn-cancel"
+                onclick="openSopVersion('old')">
+                ↗ Tautan lama (arsip)
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
 
 <!-- MODAL DASHBOARD MUTU -->
 <div id="mutuModal" class="mutu-overlay">
@@ -2686,15 +2745,18 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
 
 </a>
 
-
 <!-- 5. SOP & Pedoman -->
 <a class="card quick-card"
    href="#"
    data-protected="true"
+   data-access-type="sop-pedoman"
    data-access-name="SOP & Pedoman"
    data-access-icon="▤"
    data-access-code="Pegawai_2026"
    data-access-url="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
+   data-access-url-2022="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
+   data-access-url-2026="https://drive.google.com/drive/folders/1bAO-jZ3ew5pp21j5jWhh7xoafyBXsPsl"
+   data-access-url-old="https://docs.google.com/spreadsheets/d/17XgU0nWHBH-I4vsJw_1yAwS6EaAKWp11V8iKegwD4Eg/edit?gid=1613945653#gid=1613945653"
    onclick="openProtectedAccess(event, this)"
    target="_blank"
    rel="noopener noreferrer">
@@ -2714,6 +2776,7 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
   <p>SOP, panduan klinis, dan alur kerja.</p>
 
 </a>
+
 
 
 <!-- 6. Dokumen ICU -->
@@ -2976,7 +3039,15 @@ if(enteredCode === correctCode){
 
         return;
     }
+// KHUSUS SOP & PEDOMAN: TAMPILKAN PILIHAN VERSI
+if(accessType === "sop-pedoman"){
 
+    document.getElementById("accessModal").style.display = "none";
+
+    document.getElementById("sopVersionModal").style.display = "flex";
+
+    return;
+}
     const targetUrl =
         protectedTarget.dataset.accessUrl;
 
