@@ -2309,6 +2309,80 @@ footer p{margin:6px 0;color:#D5E7F6;font-size:14px}.footer-right{text-align:righ
     </div>
 </div>
 
+<!-- MODAL PILIH BULAN TIMBANG TERIMA -->
+<div id="timbangTerimaMonthModal" style="display:none; position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#fff; width:100%; max-width:520px; padding:24px; border-radius:16px; box-sizing:border-box;">
+    <h3 style="margin-top:0; color:#123b63;">Pilih Bulan Timbang Terima</h3>
+    <p style="color:#555;">Silakan pilih bulan untuk membuka spreadsheet.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px;">
+      <button type="button" onclick="openTimbangTerimaMonth('Januari')">Januari</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Februari')">Februari</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Maret')">Maret</button>
+      <button type="button" onclick="openTimbangTerimaMonth('April')">April</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Mei')">Mei</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Juni')">Juni</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Juli')">Juli</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Agustus')">Agustus</button>
+      <button type="button" onclick="openTimbangTerimaMonth('September')">September</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Oktober')">Oktober</button>
+      <button type="button" onclick="openTimbangTerimaMonth('November')">November</button>
+      <button type="button" onclick="openTimbangTerimaMonth('Desember')">Desember</button>
+    </div>
+
+    <p id="timbangTerimaMonthError" style="display:none; color:#c62828; margin-bottom:0;">
+      URL spreadsheet bulan ini belum diisi.
+    </p>
+
+    <button type="button" onclick="closeTimbangTerimaMonthModal()" style="margin-top:18px; padding:10px 16px; border:0; border-radius:8px; background:#e5e7eb; cursor:pointer;">
+      Tutup
+    </button>
+  </div>
+</div>
+
+<!-- MODAL PILIH BULAN JADWAL DAN SDM -->
+<div id="jadwalSdmMonthModal"
+     style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+
+  <div style="background:white; width:100%; max-width:420px; padding:24px; border-radius:16px;">
+
+    <h3 style="margin-top:0; text-align:center;">
+      Jadwal dan SDM
+    </h3>
+
+    <p style="text-align:center;">
+      Silakan pilih bulan
+    </p>
+
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+      <button type="button" onclick="openJadwalSdmMonth('Januari')">Januari</button>
+      <button type="button" onclick="openJadwalSdmMonth('Februari')">Februari</button>
+      <button type="button" onclick="openJadwalSdmMonth('Maret')">Maret</button>
+      <button type="button" onclick="openJadwalSdmMonth('April')">April</button>
+      <button type="button" onclick="openJadwalSdmMonth('Mei')">Mei</button>
+      <button type="button" onclick="openJadwalSdmMonth('Juni')">Juni</button>
+      <button type="button" onclick="openJadwalSdmMonth('Juli')">Juli</button>
+      <button type="button" onclick="openJadwalSdmMonth('Agustus')">Agustus</button>
+      <button type="button" onclick="openJadwalSdmMonth('September')">September</button>
+      <button type="button" onclick="openJadwalSdmMonth('Oktober')">Oktober</button>
+      <button type="button" onclick="openJadwalSdmMonth('November')">November</button>
+      <button type="button" onclick="openJadwalSdmMonth('Desember')">Desember</button>
+    </div>
+
+    <p id="jadwalSdmMonthError"
+       style="display:none; color:#c62828; text-align:center;">
+      URL spreadsheet bulan ini belum diatur.
+    </p>
+
+    <button type="button"
+            onclick="closeJadwalSdmMonthModal()"
+            style="width:100%; margin-top:16px;">
+      Tutup
+    </button>
+
+  </div>
+</div>
+
 
 <!-- =========================================
      MODAL PILIH VERSI SOP & PEDOMAN
@@ -3012,10 +3086,11 @@ function closeProtectedAccess(){
     protectedTarget = null;
 }
 
-function verifyProtectedAccess(event){
+
+function verifyProtectedAccess(event) {
     event.preventDefault();
 
-    if(!protectedTarget) return;
+    if (!protectedTarget) return;
 
     const input = document.getElementById("accessCode");
     const error = document.getElementById("accessError");
@@ -3023,52 +3098,128 @@ function verifyProtectedAccess(event){
     const enteredCode = input.value.trim();
     const correctCode = protectedTarget.dataset.accessCode;
     const targetUrl = protectedTarget.dataset.accessUrl;
+    const accessType = protectedTarget.dataset.accessType;
+    const accessName = protectedTarget.dataset.accessName;
 
-if(enteredCode === correctCode){
+    if (enteredCode !== correctCode) {
+        error.style.display = "block";
+        input.value = "";
+        input.focus();
+        return;
+    }
 
     error.style.display = "none";
 
-    const accessType =
-        protectedTarget.dataset.accessType;
-
-    if(accessType === "dashboard-mutu"){
-
+    // DASHBOARD MUTU
+    if (accessType === "dashboard-mutu") {
         closeProtectedAccess();
-
         openMutuDashboard();
-
         return;
     }
-// KHUSUS SOP & PEDOMAN: TAMPILKAN PILIHAN VERSI
-if(accessType === "sop-pedoman"){
 
-    document.getElementById("accessModal").style.display = "none";
+    // SOP DAN PEDOMAN
+    if (accessType === "sop-pedoman") {
+        closeProtectedAccess();
+        document.getElementById("sopVersionModal").style.display = "flex";
+        return;
+    }
 
-    document.getElementById("sopVersionModal").style.display = "flex";
+    // TIMBANG TERIMA: PILIH BULAN
+    if (accessName === "Timbang Terima") {
+        closeProtectedAccess();
+        document.getElementById("timbangTerimaMonthModal").style.display = "flex";
+        return;
+    }
 
-    return;
+    // JADWAL DAN SDM: PILIH BULAN
+    if (accessType === "jadwal-sdm") {
+        closeProtectedAccess();
+        document.getElementById("jadwalSdmMonthModal").style.display = "flex";
+        return;
+    }
+
+    // MENU LAIN: BUKA URL SEPERTI SEMULA
+    if (targetUrl) {
+        window.open(targetUrl, "_blank", "noopener,noreferrer");
+        closeProtectedAccess();
+    }
 }
-    const targetUrl =
-        protectedTarget.dataset.accessUrl;
 
-    window.open(
-        targetUrl,
-        "_blank",
-        "noopener,noreferrer"
-    );
+/* =========================================
+   KONFIGURASI SPREADSHEET TIMBANG TERIMA
+   Isi URL masing-masing bulan
+========================================= */
 
-    closeProtectedAccess();
+const timbangTerimaMonthlyUrls = {
+    "Januari": "",
+    "Februari": "",
+    "Maret": "",
+    "April": "",
+    "Mei": "",
+    "Juni": "",
+    "Juli": "",
+    "Agustus": "",
+    "September": "https://docs.google.com/spreadsheets/d/1l0VH_dJ7qg1f7g54m5xMxsewnpSw6w6toVTwFRjCblI/edit?gid=444736748#gid=444736748",
+    "Oktober": "https://docs.google.com/spreadsheets/d/14LULWE1Ry3nVEhVtKej3VlpT2qD_j5jNxx5yGYC-zK8/edit?gid=289084649#gid=289084649",
+    "November": "",
+    "Desember": ""
+};
 
-}else{
+/* =========================================
+   KONFIGURASI SPREADSHEET JADWAL DAN SDM
+========================================= */
 
-    error.style.display = "block";
+const jadwalSdmMonthlyUrls = {
+    "Januari": "",
+    "Februari": "",
+    "Maret": "",
+    "April": "",
+    "Mei": "",
+    "Juni": "",
+    "Juli": "",
+    "Agustus": "",
+    "September": "",
+    "Oktober": "https://docs.google.com/spreadsheets/d/1oyLUyRb3konnJ3yuT_E2TIyfO_e9FG0tTplMVc-7YHY/edit?gid=1733161063#gid=1733161063",
+    "November": "https://docs.google.com/spreadsheets/d/1s5Bp15CY8uF3ZNoS3QndIcZeHIPtbKH3pQaUJFbC-YQ/edit?gid=997007916#gid=997007916",
+    "Desember": ""
+};
 
-    input.value = "";
-
-    input.focus();
-
+function closeJadwalSdmMonthModal() {
+    document.getElementById("jadwalSdmMonthModal").style.display = "none";
 }
+
+function openJadwalSdmMonth(bulan) {
+    const url = jadwalSdmMonthlyUrls[bulan];
+    const error = document.getElementById("jadwalSdmMonthError");
+
+    if (!url || !url.trim()) {
+        error.style.display = "block";
+        return;
+    }
+
+    error.style.display = "none";
+    window.open(url, "_blank", "noopener,noreferrer");
+    closeJadwalSdmMonthModal();
 }
+
+function closeTimbangTerimaMonthModal(){
+    document.getElementById("timbangTerimaMonthModal").style.display = "none";
+}
+
+function openTimbangTerimaMonth(bulan){
+    const url = timbangTerimaMonthlyUrls[bulan];
+    const error = document.getElementById("timbangTerimaMonthError");
+
+    if(!url || !url.trim()){
+        error.style.display = "block";
+        return;
+    }
+
+    error.style.display = "none";
+    window.open(url, "_blank", "noopener,noreferrer");
+    closeTimbangTerimaMonthModal();
+}
+
 /* =================================
    DASHBOARD MUTU
 ================================= */
@@ -3726,7 +3877,54 @@ document.addEventListener("click", function(e){
   }
 
 });
- 
+
+/* =========================================
+   PERBAIKAN MODAL SOP & PEDOMAN
+========================================= */
+
+function closeSopVersionModal() {
+    const modal = document.getElementById("sopVersionModal");
+
+    if (modal) {
+        modal.style.display = "none";
+    }
+
+    // Pastikan modal akses juga tertutup
+    const accessModal = document.getElementById("accessModal");
+
+    if (accessModal) {
+        accessModal.style.display = "none";
+    }
+
+    protectedTarget = null;
+}
+
+function openSopVersion(version) {
+    if (!protectedTarget) {
+        closeSopVersionModal();
+        return;
+    }
+
+    let targetUrl = "";
+
+    if (version === "2022") {
+        targetUrl = protectedTarget.dataset.accessUrl2022;
+    } else if (version === "2026") {
+        targetUrl = protectedTarget.dataset.accessUrl2026;
+    } else if (version === "old") {
+        targetUrl = protectedTarget.dataset.accessUrlOld;
+    }
+
+    if (!targetUrl) {
+        alert("Tautan dokumen belum tersedia.");
+        return;
+    }
+
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
+
+    closeSopVersionModal();
+}
+
 </script>
 </body>
 </html>
